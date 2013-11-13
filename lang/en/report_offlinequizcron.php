@@ -26,17 +26,21 @@
  *
  **/
 
+$string['apply'] = 'Apply';
 $string['getreport'] = 'Get the report';
 $string['intro'] = 'This report lets you administrate the offlinequiz cronjob for answer form evaluation.';
 $string['importuser'] = 'Created By';
 $string['jobid'] = 'ID';
 $string['offlinequizcron:view'] = 'View offlinequiz cron admin report';
 $string['offlinequizjobs'] = 'List of offline quiz evaluation jobs';
+$string['pagesize'] = 'Number of jobs per page';
 $string['pluginname'] = 'Offlinequiz Cronjob Admin';
 $string['reportsettings'] = 'Report settings';
+$string['showjobswithstatus'] = 'Show jobs with status';
 $string['status'] = 'Status';
 $string['statusnew'] = 'Open';
 $string['statusprocessing'] = 'Processing';
 $string['statusfinished'] = 'Finished';
+$string['timecreated'] = 'Created At';
 $string['timestart'] = 'Start Time';
 $string['timefinish'] = 'End Time';

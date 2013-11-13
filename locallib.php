@@ -27,8 +27,14 @@
  **/
 
 class offlinequiz_jobs_table extends flexible_table {
-    public function __construct($uniqueid) {
+
+    protected $reportscript;
+    protected $params;
+
+    public function __construct($uniqueid, $reportscript, $params) {
         parent::__construct($uniqueid);
+        $this->reportscript = $reportscript;
+        $this->params = $params;
     }
 
     public function print_nothing_to_display() {
@@ -39,13 +45,27 @@ class offlinequiz_jobs_table extends flexible_table {
     public function wrap_html_start() {
         $strreallydel  = addslashes(get_string('deleteresultcheck', 'offlinequiz'));
         echo '<div id="tablecontainer" class="centerbox">';
-        echo '  <center>';
+        echo '<form id="reportform" method="post" action="'. $this->reportscript . '" >';
+        echo ' <div>';
+        echo get_string('showjobswithstatus', 'report_offlinequizcron') . ': &nbsp;&nbsp;&nbsp;';
+        foreach ($this->params as $name => $value) {
+            if ($value) {
+                $checked = 'checked="checked"';
+            } else {
+                $checked = '';
+            }
+            echo '<input type="checkbox" name="' . $name .'" ' . $checked . '/>' . get_string($name, 'report_offlinequizcron') . '&nbsp;&nbsp;&nbsp;&nbsp;';
+        }
+        echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
+        echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" />';
+        echo '  <br/><br/><center>';
     }
 
     public function wrap_html_finish() {
         echo '  </center>';
         // Close form
         echo ' </div>';
+        echo '</form></div>';
     }
 
 //     protected function print_one_initials_bar($alpha, $current, $class, $title, $urlvar) {

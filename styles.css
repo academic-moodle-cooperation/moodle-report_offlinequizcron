@@ -38,6 +38,11 @@
 	 border-right: 1px solid #BBBBBB !important;
 }
 
+#page-admin-report-offlinequizcron-index form#reportform input[type="checkbox"] {
+ 	margin-right: 3px;
+ 	vertical-align: middle;	
+}
+
 div.paging {
 	text-align: center;
 }
