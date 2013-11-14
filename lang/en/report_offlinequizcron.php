@@ -27,20 +27,27 @@
  **/
 
 $string['apply'] = 'Apply';
+$string['backtomainpage'] = 'Back to the job list';
+$string['error'] = 'Error';
+$string['filename'] = 'Filename';
+$string['files'] = 'Image Files';
 $string['getreport'] = 'Get the report';
 $string['intro'] = 'This report lets you administrate the offlinequiz cronjob for answer form evaluation.';
 $string['importuser'] = 'Created By';
 $string['jobid'] = 'ID';
+$string['nofiles'] = 'No files found';
 $string['offlinequizcron:view'] = 'View offlinequiz cron admin report';
+$string['offlinequizjobdetails'] = 'Details of evaluation job {$a}';
 $string['offlinequizjobs'] = 'List of offline quiz evaluation jobs';
 $string['pagesize'] = 'Number of jobs per page';
 $string['pluginname'] = 'Offlinequiz Cronjob Admin';
 $string['reportsettings'] = 'Report settings';
 $string['showjobswithstatus'] = 'Show jobs with status';
 $string['status'] = 'Status';
-$string['statusnew'] = 'Open';
-$string['statusprocessing'] = 'Processing';
+$string['statuserror'] = 'Error';
 $string['statusfinished'] = 'Finished';
+$string['statusnew'] = 'New';
+$string['statusprocessing'] = 'Processing';
 $string['timecreated'] = 'Created At';
-$string['timestart'] = 'Start Time';
-$string['timefinish'] = 'End Time';
+$string['timestart'] = 'Evaluation Start';
+$string['timefinish'] = 'Evaluation End';

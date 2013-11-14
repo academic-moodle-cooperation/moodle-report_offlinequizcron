@@ -43,9 +43,14 @@
  	vertical-align: middle;	
 }
 
+#page-admin-report-offlinequizcron-index table#jobdetailstable {
+	 border: 1px solid #BBBBBB !important;
+}
+
 div.paging {
 	text-align: center;
 }
+
 div.centerbox {
 	text-align: center;
 }
