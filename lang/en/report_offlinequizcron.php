@@ -28,9 +28,12 @@
 
 $string['apply'] = 'Apply';
 $string['backtomainpage'] = 'Back to the job list';
+$string['downloadallfiles'] = 'Download All Files As ZIP';
+$string['downloadselected'] = 'Download Selected Files As ZIP';
 $string['error'] = 'Error';
 $string['filename'] = 'Filename';
 $string['files'] = 'Image Files';
+$string['files_help'] = 'Below is the list of files in the DB table {offlinequiz_queue_data}.';
 $string['getreport'] = 'Get the report';
 $string['intro'] = 'This report lets you administrate the offlinequiz cronjob for answer form evaluation.';
 $string['importuser'] = 'Created By';
@@ -39,9 +42,11 @@ $string['nofiles'] = 'No files found';
 $string['offlinequizcron:view'] = 'View offlinequiz cron admin report';
 $string['offlinequizjobdetails'] = 'Details of evaluation job {$a}';
 $string['offlinequizjobs'] = 'List of offline quiz evaluation jobs';
+$string['offlinequizjobs_help'] = 'Below is the list of jobs in the DB table {offlinequiz_queue}.';
 $string['pagesize'] = 'Number of jobs per page';
 $string['pluginname'] = 'Offlinequiz Cronjob Admin';
 $string['reportsettings'] = 'Report settings';
+$string['resubmitjob'] = 'Submit Job Again';
 $string['showjobswithstatus'] = 'Show jobs with status';
 $string['status'] = 'Status';
 $string['statuserror'] = 'Error';

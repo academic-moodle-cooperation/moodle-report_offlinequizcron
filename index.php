@@ -27,8 +27,6 @@
  **/
 
 require(dirname(__FILE__).'/../../config.php');
-require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->libdir . '/tablelib.php');
 require_once($CFG->dirroot . '/report/offlinequizcron/locallib.php');
 
 // Get URL parameters.

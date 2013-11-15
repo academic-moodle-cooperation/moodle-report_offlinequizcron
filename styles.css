@@ -25,6 +25,15 @@
  *
  **/
 
+#page-admin-report-offlinequizcron-index div.centerbox {
+	text-align: center;
+}
+
+#page-admin-report-offlinequizcron-index div.commandsdiv {
+	 width: 100%;
+/*	 text-align: left; */
+}
+
 #page-admin-report-offlinequizcron-index div#tablecontainer table {
 	 border: 1px solid #BBBBBB !important;
 }
@@ -47,10 +56,18 @@
 	 border: 1px solid #BBBBBB !important;
 }
 
+
+#page-admin-report-offlinequizcron-index div.filestable {
+	width: 90%;
+}
+
+#page-admin-report-offlinequizcron-index div.controls {
+	text-align: center;
+	width: 80%;
+}
+
+
 div.paging {
 	text-align: center;
 }
 
-div.centerbox {
-	text-align: center;
-}
