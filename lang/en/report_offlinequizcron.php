@@ -28,6 +28,8 @@
 
 $string['apply'] = 'Apply';
 $string['backtomainpage'] = 'Back to the job list';
+$string['deletejob'] = 'Delete Job';
+$string['deletejobcheck'] = 'Do you really want to delete the job?';
 $string['downloadallfiles'] = 'Download All Files As ZIP';
 $string['downloadselected'] = 'Download Selected Files As ZIP';
 $string['error'] = 'Error';
@@ -40,7 +42,7 @@ $string['importuser'] = 'Created By';
 $string['jobid'] = 'ID';
 $string['nofiles'] = 'No files found';
 $string['offlinequizcron:view'] = 'View offlinequiz cron admin report';
-$string['offlinequizjobdetails'] = 'Details of evaluation job {$a}';
+$string['offlinequizjobdetails'] = 'Details of Evaluation Job {$a}';
 $string['offlinequizjobs'] = 'List of offline quiz evaluation jobs';
 $string['offlinequizjobs_help'] = 'Below is the list of jobs in the DB table {offlinequiz_queue}.';
 $string['pagesize'] = 'Number of jobs per page';
@@ -52,6 +54,7 @@ $string['status'] = 'Status';
 $string['statuserror'] = 'Error';
 $string['statusfinished'] = 'Finished';
 $string['statusnew'] = 'New';
+$string['statusprocessed'] = 'Processed';
 $string['statusprocessing'] = 'Processing';
 $string['timecreated'] = 'Created At';
 $string['timestart'] = 'Evaluation Start';

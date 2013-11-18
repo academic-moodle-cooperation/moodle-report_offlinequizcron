@@ -39,8 +39,6 @@ $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/sty
 // Log.
 // add_to_log(SITEID, "admin", "report offlinequizcron", "report/offlinequizcron/index.php?jobid=$jobid", $jobid);
 
-echo $OUTPUT->header();
-
 // Prepare the list of capabilities to choose from
 
 if ($jobid) {
