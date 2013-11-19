@@ -194,8 +194,8 @@ function offlinequizcron_display_job_list() {
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
               JOIN {user} u on oqq.importuserid = u.id
-              WHERE 1=1
-    ";
+             WHERE 1=1
+             ";
 
     $sqlparams = array();
 
@@ -289,7 +289,7 @@ function offlinequizcron_display_job_details($jobid) {
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
               JOIN {user} u on oqq.importuserid = u.id
-              WHERE oqq.id = :jobid
+             WHERE oqq.id = :jobid
               ";
 
     $params = array('jobid' => $jobid);
@@ -330,8 +330,8 @@ function offlinequizcron_display_job_details($jobid) {
     echo html_writer::table($detailstable);
 
     // Print button to re-submit job.
-    echo '<center><div style="width: 32em;">';
-    echo '<div style="width: 10em; float: left;">';
+    echo '<center><div class="buttons">';
+    echo '<div class="resubmitbutton">';
     echo '<form id="reportform" method="post" action="'. $resubmiturl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') . '" />';
@@ -340,7 +340,7 @@ function offlinequizcron_display_job_details($jobid) {
 
     // Print button for deleting the job.
     $strreallydel  = addslashes(get_string('deletejobcheck', 'report_offlinequizcron'));
-    echo '<div style="width: 7em; float: left;">';
+    echo '<div class="deletebutton">';
     echo '<form id="reportform" method="post" action="'. $reporturl . '" onsubmit="return confirm(\'' . $strreallydel . '\');">';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="hidden" name="deleteid" value="' . $job->id . '" />';
@@ -349,7 +349,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo '</div>';
 
     // Print button for downloading all files of this job.
-    echo '<div style="width: 14em; float: left;">';
+    echo '<div class="downloadbutton">';
     echo '<form id="reportform" method="post" action="'. $downloadurl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" />';

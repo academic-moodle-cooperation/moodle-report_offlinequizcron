@@ -66,6 +66,24 @@
 	width: 80%;
 }
 
+#page-admin-report-offlinequizcron-index div.buttons { 
+    width: 32em;
+}
+
+#page-admin-report-offlinequizcron-index div.resubmitbutton { 
+    width: 10em;
+    float: left;
+}
+
+#page-admin-report-offlinequizcron-index div.deletebutton { 
+    width: 7em;
+    float: left;
+}
+
+#page-admin-report-offlinequizcron-index div.downloadbutton { 
+    width: 14em;
+    float: left;
+}
 
 div.paging {
 	text-align: center;
