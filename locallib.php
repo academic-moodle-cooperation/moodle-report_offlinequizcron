@@ -138,13 +138,13 @@ function offlinequizcron_display_job_list() {
         $pagesize = 10;
     }
     
-    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php');
+    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished, 'pagesize' => $pagesize));
 
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
     echo $OUTPUT->heading_with_help(get_string('offlinequizjobs', 'report_offlinequizcron'), 'offlinequizjobs', 'report_offlinequizcron');
 
-    // Initialise the table.
+	// Initialise the table.
     $statusvalues = array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished);
 
     // Print checkboxes for status filters. 
@@ -252,6 +252,9 @@ function offlinequizcron_display_job_list() {
     echo '<div class="controls">';
     echo ' <form id="options" action="index.php" method="get">';
     echo '     <label for="pagesize">' . get_string('pagesize', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
+    foreach ($statusvalues as $name => $value) {
+		echo '     <input type="hidden" name="' . $name .'" value="' . $value . '"/>';
+    }
     echo '     <input type="text" id="pagesize" name="pagesize" size="3" value="' . $pagesize . '" />';
     echo ' </form>';
     echo '</div>';
@@ -352,6 +355,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo '<div class="downloadbutton">';
     echo '<form id="reportform" method="post" action="'. $downloadurl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
+    echo ' <input type="hidden" name="downloadall" value="1" />';	
     echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" />';
     echo '</form>';
     echo '</div>';

@@ -31,6 +31,7 @@ require_once($CFG->libdir . '/filelib.php');
 
 $fileid = optional_param('fileid', 0, PARAM_INT);
 $jobid = optional_param('jobid', 0, PARAM_INT);
+$jobid = optional_param('downloadall', 0, PARAM_INT);	
 
 require_login();
 
@@ -50,7 +51,7 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
         $shortname = shorten_text($pathparts['basename']);
         send_file($file->filename, $shortname, 'default' , 0, false, true);
     }
-} else if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))) {
+} else if ($jobid && $downloadall && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))) {
     // Download all files of a job as a ZIP archive.
     $files = $DB->get_records('offlinequiz_queue_data', array('queueid' => $job->id));
     $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', array('id' => $job->id));
@@ -106,7 +107,7 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
         $tempzip = tempnam($CFG->tempdir . '/', 'offlinequizcronfiles');
 
         if ($zipper->archive_to_pathname($filelist, $tempzip)) {
-          send_temp_file($tempzip, clean_filename($zipfilename) . '.zip');
+	    	send_temp_file($tempzip, clean_filename($zipfilename) . '.zip');
         }
     } 
 }
