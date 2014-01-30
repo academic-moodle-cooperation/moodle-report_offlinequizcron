@@ -138,7 +138,12 @@ function offlinequizcron_display_job_list() {
         $pagesize = 10;
     }
     
-    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished, 'pagesize' => $pagesize));
+    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize' => $pagesize));
+    $tablebaseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php',
+            array('statusnew' => $statusnew,
+                  'statusprocessing' => $statusprocessing,
+                  'statusfinished' => $statusfinished,
+                  'pagesize' => $pagesize));
 
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
@@ -179,7 +184,7 @@ function offlinequizcron_display_job_list() {
 
     $table->define_columns($tablecolumns);
     $table->define_headers($tableheaders);
-    $table->define_baseurl($baseurl);
+    $table->define_baseurl($tablebaseurl);
     $table->sortable(true);
     $table->setup();
 
@@ -197,6 +202,14 @@ function offlinequizcron_display_job_list() {
              WHERE 1=1
              ";
 
+    $countsql = "SELECT COUNT(oqq.id)
+                   FROM {offlinequiz_queue} oqq
+                   JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
+                   JOIN {course} c on oq.course = c.id
+                   JOIN {user} u on oqq.importuserid = u.id
+                  WHERE 1=1
+                  ";
+
     $sqlparams = array();
 
     if ($statusnew || $statusfinished || $statusprocessing) {
@@ -212,6 +225,7 @@ function offlinequizcron_display_job_list() {
         }
         list($ssql, $sparams) = $DB->get_in_or_equal($statuses);
         $sql .= " AND oqq.status $ssql ";
+        $countsql .= " AND oqq.status $ssql ";
         $sqlparams = $sparams;
     }
 
@@ -221,7 +235,7 @@ function offlinequizcron_display_job_list() {
         $sql .= "ORDER BY id DESC";
     }
 
-    $total = $DB->count_records('offlinequiz_queue');
+    $total = $DB->count_records_sql($countsql, $sqlparams);
     $table->pagesize($pagesize, $total);
 
     $jobs = $DB->get_records_sql($sql, $sqlparams, $table->get_page_start(), $table->get_page_size());
