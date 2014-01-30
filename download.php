@@ -31,7 +31,7 @@ require_once($CFG->libdir . '/filelib.php');
 
 $fileid = optional_param('fileid', 0, PARAM_INT);
 $jobid = optional_param('jobid', 0, PARAM_INT);
-$jobid = optional_param('downloadall', 0, PARAM_INT);	
+$downloadall = optional_param('downloadall', 0, PARAM_INT);	
 
 require_login();
 
