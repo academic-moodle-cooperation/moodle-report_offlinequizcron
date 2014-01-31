@@ -416,20 +416,29 @@ function offlinequizcron_display_job_details($jobid) {
     $files = $DB->get_records_sql($sql, $sqlparams, $table->get_page_start(), $table->get_page_size());
 
     foreach ($files as $file) {
-        if (file_exists($file->filename)) {
-            $fileurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/download.php', array('fileid' => $file->id));
-            $pathparts = pathinfo($file->filename);
-            $shortname = shorten_text($pathparts['basename']);
-            $error = '';
-            if (!empty($file->error)) {
-                $error = get_string('error' . $file->error, 'offlinequiz_rimport');
-            }
-            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" />';
+        $fileurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/download.php', array('fileid' => $file->id));
+        $pathparts = pathinfo($file->filename);
+        $shortname = shorten_text($pathparts['basename']);
+        $error = '';
+        if (!empty($file->error)) {
+            $error = get_string('error' . $file->error, 'offlinequiz_rimport');
+        }
 
+        if (file_exists($file->filename)) {
+            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" />';
             $table->add_data(array(
                     $checkbox,
                     $file->id,
                     html_writer::link($fileurl, $shortname, array('title' => $file->filename)),
+                    get_string('status' . $file->status, 'report_offlinequizcron'),
+                    $error
+            ));
+        } else {
+            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" disabled="disabled" />';
+            $table->add_data(array(
+                    $checkbox,
+                    $file->id,
+                    html_writer::span($shortname, '', array('title' => $file->filename)),
                     get_string('status' . $file->status, 'report_offlinequizcron'),
                     $error
             ));
