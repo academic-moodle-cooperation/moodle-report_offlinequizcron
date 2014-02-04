@@ -171,7 +171,7 @@ function offlinequizcron_display_job_list() {
     // Print the table of offlinequiz evaluation jobs.
     $table = new offlinequizcron_jobs_table('offlinequizcronadmin');
 
-    $tablecolumns = array('id', 'status', 'oqname', 'cshortname', 'uid', 'jobtimecreated', 'jobtimestart', 'jobtimefinish');
+    $tablecolumns = array('id', 'status', 'oqname', 'cshortname', 'lastname', 'jobtimecreated', 'jobtimestart', 'jobtimefinish');
     $tableheaders = array(
             get_string('jobid', 'report_offlinequizcron'),
             get_string('status', 'report_offlinequizcron'),
