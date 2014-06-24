@@ -30,6 +30,10 @@ require(dirname(__FILE__).'/../../config.php');
 require_once($CFG->libdir . '/filelib.php');
 
 $jobid = optional_param('jobid', 0, PARAM_INT);
+$pagesize = optional_param('pagesize', 20, PARAM_INT);
+$statusnew = optional_param('statusnew', 0, PARAM_INT);
+$statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
+$statusfinished = optional_param('statusfinished', 0, PARAM_INT);
 
 require_login();
 
@@ -54,6 +58,9 @@ if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))
         $file->error = null;
         $DB->update_record('offlinequiz_queue_data', $file);
     }
-    redirect($CFG->wwwroot . '/report/offlinequizcron/index.php');
+    redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize' => $pagesize,
+    		          'statusnew' => $statusnew,
+                      'statusprocessing' => $statusprocessing,
+                      'statusfinished' => $statusfinished)));
 }
 
