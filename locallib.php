@@ -194,7 +194,7 @@ function offlinequizcron_display_job_list() {
                    oqq.timecreated as jobtimecreated, oqq.timestart as jobtimestart, oqq.timefinish as jobtimefinish,
                    oq.id as oqid, oq.name as oqname,
                    c.shortname as cshortname, c.id as cid,
-                   u.id as uid, u.firstname as firstname, u.lastname as lastname
+                   u.id as uid, u.firstname as firstname, u.lastname as lastname, u.alternatename, u.middlename, u.firstnamephonetic, u.lastnamephonetic
               FROM {offlinequiz_queue} oqq
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
@@ -301,7 +301,7 @@ function offlinequizcron_display_job_details($jobid) {
                    oqq.timecreated as jobtimecreated, oqq.timestart as jobtimestart, oqq.timefinish as jobtimefinish,
                    oq.id as oqid, oq.name as oqname,
                    c.shortname as cshortname, c.id as cid,
-                   u.id as uid, u.firstname as firstname, u.lastname as lastname
+                   u.id as uid, u.firstname as firstname, u.lastname as lastname, u.alternatename, u.middlename, u.firstnamephonetic, u.lastnamephonetic
               FROM {offlinequiz_queue} oqq
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
