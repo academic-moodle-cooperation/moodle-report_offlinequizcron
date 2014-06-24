@@ -46,7 +46,7 @@ if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))
     $job->status = 'new';
     $job->timecreated = time();
     $job->timestart = 0;
-    $job->timefinished = 0;
+    $job->timefinish = 0;
     $DB->update_record('offlinequiz_queue', $job);
     
     foreach($files as $file) {
