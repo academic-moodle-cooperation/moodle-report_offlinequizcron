@@ -54,6 +54,7 @@
 
 #page-admin-report-offlinequizcron-index table#jobdetailstable {
 	 border: 1px solid #BBBBBB !important;
+	 width: 70%;
 }
 
 
@@ -67,22 +68,21 @@
 }
 
 #page-admin-report-offlinequizcron-index div.buttons { 
-    width: 32em;
+    width: auto;
+    display: inline-block;
 }
 
+
 #page-admin-report-offlinequizcron-index div.resubmitbutton { 
-    width: 10em;
-    float: left;
+    display: inline-block;
 }
 
 #page-admin-report-offlinequizcron-index div.deletebutton { 
-    width: 7em;
-    float: left;
+    display: inline-block;
 }
 
 #page-admin-report-offlinequizcron-index div.downloadbutton { 
-    width: 14em;
-    float: left;
+    display: inline-block;
 }
 
 div.paging {

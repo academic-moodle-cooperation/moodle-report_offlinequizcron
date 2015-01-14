@@ -334,6 +334,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
     echo $OUTPUT->heading(get_string('offlinequizjobdetails', 'report_offlinequizcron', $job->id));
+    echo html_writer::empty_tag('br');
 
     $reporturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id));
     $downloadurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/download.php');
@@ -392,7 +393,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" />';
     echo '</form>';
     echo '</div>';
-    echo '</div></center><br/><br/>';
+    echo '</div></center><br/>';
 
     echo $OUTPUT->heading_with_help(get_string('files', 'report_offlinequizcron'), 'files', 'report_offlinequizcron');
 
