@@ -39,12 +39,13 @@ echo $OUTPUT->box_start('centerbox');
 echo $OUTPUT->heading(get_string('processingqueue', 'report_offlinequizcron'));
 echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
-echo '<br/><br/><pre>';
+echo '<br/><br/>';
 ob_flush();
 
 offlinequiz_evaluation_cron(0, true);
 
-echo '</pre>';
+echo '<br/><br/>';
+
 echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
 echo $OUTPUT->box_end();
