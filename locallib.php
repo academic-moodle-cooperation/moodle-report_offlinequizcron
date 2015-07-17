@@ -361,6 +361,12 @@ function offlinequizcron_display_job_details($jobid) {
     $detailstable->data[] = array(get_string('timefinish', 'report_offlinequizcron'), $job->jobtimefinish > 0 ? userdate($job->jobtimefinish , $strtimeformat) : '');
     echo html_writer::table($detailstable);
 
+    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
+    $disabled = '';
+    if (!$total) {
+        $disabled = 'disabled="disabled"';
+    }
+
     // Print button to re-submit job.
     echo '<center><div class="buttons">';
     echo '<div class="resubmitbutton">';
@@ -370,7 +376,8 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
     echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
-    echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') . '" />';
+    echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
+             '" ' . $disabled . '"/>';
     echo '</form>';
     echo '</div>';
 
@@ -393,7 +400,8 @@ function offlinequizcron_display_job_details($jobid) {
     echo '<form id="reportform" method="post" action="'. $downloadurl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="hidden" name="downloadall" value="1" />';	
-    echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" />';
+    echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" ' .
+        $disabled . '/>';
     echo '</form>';
     echo '</div>';
     echo '</div></center><br/>';
@@ -433,7 +441,6 @@ function offlinequizcron_display_job_details($jobid) {
         $sql .= "ORDER BY id ASC";
     }
 
-    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
     $table->pagesize($pagesize, $total);
 
     $files = $DB->get_records_sql($sql, $sqlparams, $table->get_page_start(), $table->get_page_size());
