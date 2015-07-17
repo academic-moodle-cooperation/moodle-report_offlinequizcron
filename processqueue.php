@@ -40,6 +40,7 @@ echo $OUTPUT->heading(get_string('processingqueue', 'report_offlinequizcron'));
 echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
 echo '<br/><br/><pre>';
+ob_flush();
 
 offlinequiz_evaluation_cron(0, true);
 
