@@ -85,6 +85,14 @@
     display: inline-block;
 }
 
+#page-admin-report-offlinequizcron-index .processqueue { 
+    font-weight: bold;
+}
+
+#page-admin-report-offlinequizcron-index .backtomainlink { 
+    font-weight: bold;
+}
+
 div.paging {
 	text-align: center;
 }

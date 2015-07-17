@@ -168,6 +168,9 @@ function offlinequizcron_display_job_list() {
     echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" />';
     echo '</div></form><br/>';
 
+    echo '<a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">' .
+            '<label class="processqueue">' . get_string('processqueue', 'report_offlinequizcron') . '</label></a><br/>';
+    
     // Print the table of offlinequiz evaluation jobs.
     $table = new offlinequizcron_jobs_table('offlinequizcronadmin');
 
