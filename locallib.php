@@ -153,7 +153,7 @@ function offlinequizcron_display_job_list() {
     $statusvalues = array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished);
 
     // Print checkboxes for status filters. 
-    echo '<form id="reportform" method="post" action="'. $baseurl . '" >';
+    echo '<form id="reportform" method="get" action="'. $baseurl . '" >';
     echo ' <div>';
     echo get_string('showjobswithstatus', 'report_offlinequizcron') . ': &nbsp;&nbsp;&nbsp;';
     foreach ($statusvalues as $name => $value) {
@@ -168,6 +168,9 @@ function offlinequizcron_display_job_list() {
     echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" />';
     echo '</div></form><br/>';
 
+    echo '<a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">' .
+            '<label class="processqueue">' . get_string('processqueue', 'report_offlinequizcron') . '</label></a><br/>';
+    
     // Print the table of offlinequiz evaluation jobs.
     $table = new offlinequizcron_jobs_table('offlinequizcronadmin');
 
@@ -194,7 +197,7 @@ function offlinequizcron_display_job_list() {
                    oqq.timecreated as jobtimecreated, oqq.timestart as jobtimestart, oqq.timefinish as jobtimefinish,
                    oq.id as oqid, oq.name as oqname,
                    c.shortname as cshortname, c.id as cid,
-                   u.id as uid, u.firstname as firstname, u.lastname as lastname
+                   u.id as uid, u.firstname as firstname, u.lastname as lastname, u.alternatename, u.middlename, u.firstnamephonetic, u.lastnamephonetic
               FROM {offlinequiz_queue} oqq
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
@@ -242,7 +245,11 @@ function offlinequizcron_display_job_list() {
 
     $strtimeformat = get_string('strftimedatetime');
     foreach ($jobs as $job) {
-        $joburl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id));
+        $joburl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id,
+        		      'statusnew' => $statusnew,
+                      'statusprocessing' => $statusprocessing,
+                      'statusfinished' => $statusfinished,
+                      'pagesize' => $pagesize));
         $offlinequizurl = new moodle_url($CFG->wwwroot . '/mod/offlinequiz/view.php', array('q' => $job->oqid));
         $courseurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $job->cid));
         $userurl = new moodle_url($CFG->wwwroot . '/user/profile.php', array('id' => $job->uid));
@@ -283,6 +290,15 @@ function offlinequizcron_display_job_details($jobid) {
     global $CFG, $DB, $OUTPUT;
 
     $deleteid = optional_param('deleteid', 0, PARAM_INT);
+    $statusnew = optional_param('statusnew', 0, PARAM_INT);
+    $statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
+    $statusfinished = optional_param('statusfinished', 0, PARAM_INT);
+
+    $pagesize = optional_param('pagesize', 20, PARAM_INT);
+    if ($pagesize < 1) {
+        $pagesize = 10;
+    }
+
 
     // Delete a job from the DB. 
     if ($deleteid && $deletejob = $DB->get_record('offlinequiz_queue', array('id' => $deleteid))) {
@@ -294,14 +310,17 @@ function offlinequizcron_display_job_details($jobid) {
             $DB->delete_records('offlinequiz_queue_data', array('queueid' => $deletejob->id));
         }
         $DB->delete_records('offlinequiz_queue', array('id' => $deletejob->id));
-        redirect($CFG->wwwroot . '/report/offlinequizcron/index.php');
+        redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('statusnew' => $statusnew,
+                  'statusprocessing' => $statusprocessing,
+                  'statusfinished' => $statusfinished,
+                  'pagesize' => $pagesize)));
     }
 
     $sql = "SELECT oqq.id, oqq.status,
                    oqq.timecreated as jobtimecreated, oqq.timestart as jobtimestart, oqq.timefinish as jobtimefinish,
                    oq.id as oqid, oq.name as oqname,
                    c.shortname as cshortname, c.id as cid,
-                   u.id as uid, u.firstname as firstname, u.lastname as lastname
+                   u.id as uid, u.firstname as firstname, u.lastname as lastname, u.alternatename, u.middlename, u.firstnamephonetic, u.lastnamephonetic
               FROM {offlinequiz_queue} oqq
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
@@ -315,16 +334,12 @@ function offlinequizcron_display_job_details($jobid) {
         redirect($CFG->wwwroot . '/report/offlinequizcron/index.php');
     }
 
-    $pagesize = optional_param('pagesize', 20, PARAM_INT);
-    if ($pagesize < 1) {
-        $pagesize = 10;
-    }
-
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
     echo $OUTPUT->heading(get_string('offlinequizjobdetails', 'report_offlinequizcron', $job->id));
+    echo html_writer::empty_tag('br');
 
-    $reporturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id, 'pagesize' => $pagesize));
+    $reporturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id));
     $downloadurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/download.php');
     $resubmiturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/resubmit.php');
     $offlinequizurl = new moodle_url($CFG->wwwroot . '/mod/offlinequiz/view.php', array('q' => $job->oqid));
@@ -346,12 +361,23 @@ function offlinequizcron_display_job_details($jobid) {
     $detailstable->data[] = array(get_string('timefinish', 'report_offlinequizcron'), $job->jobtimefinish > 0 ? userdate($job->jobtimefinish , $strtimeformat) : '');
     echo html_writer::table($detailstable);
 
+    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
+    $disabled = '';
+    if (!$total) {
+        $disabled = 'disabled="disabled"';
+    }
+
     // Print button to re-submit job.
     echo '<center><div class="buttons">';
     echo '<div class="resubmitbutton">';
     echo '<form id="reportform" method="post" action="'. $resubmiturl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
-    echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') . '" />';
+    echo ' <input type="hidden" name="statusnew" value="' .$statusnew . '" />';
+    echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
+    echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
+    echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
+    echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
+             '" ' . $disabled . '"/>';
     echo '</form>';
     echo '</div>';
 
@@ -361,6 +387,10 @@ function offlinequizcron_display_job_details($jobid) {
     echo '<form id="reportform" method="post" action="'. $reporturl . '" onsubmit="return confirm(\'' . $strreallydel . '\');">';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="hidden" name="deleteid" value="' . $job->id . '" />';
+    echo ' <input type="hidden" name="statusnew" value="' .$statusnew . '" />';
+    echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
+    echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
+    echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
     echo ' <input type="submit" value="' . get_string('deletejob', 'report_offlinequizcron') . '" />';
     echo '</form>';
     echo '</div>';
@@ -370,10 +400,11 @@ function offlinequizcron_display_job_details($jobid) {
     echo '<form id="reportform" method="post" action="'. $downloadurl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="hidden" name="downloadall" value="1" />';	
-    echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" />';
+    echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" ' .
+        $disabled . '/>';
     echo '</form>';
     echo '</div>';
-    echo '</div></center><br/><br/>';
+    echo '</div></center><br/>';
 
     echo $OUTPUT->heading_with_help(get_string('files', 'report_offlinequizcron'), 'files', 'report_offlinequizcron');
 
@@ -410,7 +441,6 @@ function offlinequizcron_display_job_details($jobid) {
         $sql .= "ORDER BY id ASC";
     }
 
-    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
     $table->pagesize($pagesize, $total);
 
     $files = $DB->get_records_sql($sql, $sqlparams, $table->get_page_start(), $table->get_page_size());
@@ -456,7 +486,10 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' </form>';
     echo '</div><br/>';
 
-    $backurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php');
+    $backurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array(
+    		          'statusnew' => $statusnew,
+                      'statusprocessing' => $statusprocessing,
+                      'statusfinished' => $statusfinished));
     echo html_writer::link($backurl, get_string('backtomainpage', 'report_offlinequizcron'));
     echo '</center>';
     echo $OUTPUT->box_end();
