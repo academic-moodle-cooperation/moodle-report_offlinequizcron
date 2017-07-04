@@ -52,6 +52,7 @@ $string['processingqueue'] = 'Processing Queue';
 $string['reportsettings'] = 'Report settings';
 $string['resubmitjob'] = 'Submit Job Again';
 $string['showjobswithstatus'] = 'Show jobs with status';
+$string['search'] = 'Search';
 $string['status'] = 'Status';
 $string['statuserror'] = 'Error';
 $string['statusfinished'] = 'Finished';

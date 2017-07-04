@@ -52,6 +52,7 @@ $string['processingqueue'] = 'Warteschlange wird ausgewertet';
 $string['reportsettings'] = 'Einstellungen des Berichts';
 $string['resubmitjob'] = 'Erneut Auswerten';
 $string['showjobswithstatus'] = 'Zeige Jobs mit Status';
+$string['search'] = 'Suche';
 $string['status'] = 'Status';
 $string['statuserror'] = 'Fehler';
 $string['statusfinished'] = 'Beendet';

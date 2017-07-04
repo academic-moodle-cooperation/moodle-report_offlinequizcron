@@ -122,7 +122,7 @@ class offlinequizcron_job_files_table extends flexible_table {
  */
 function offlinequizcron_display_job_list() {
     global $CFG, $DB, $OUTPUT;
-
+    $searchterm= optional_param('searchterm', '', PARAM_TEXT);
     $pagesize = optional_param('pagesize', 20, PARAM_INT);
     $statusnew = optional_param('statusnew', 0, PARAM_INT);
     $statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
@@ -153,8 +153,7 @@ function offlinequizcron_display_job_list() {
     $statusvalues = array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished);
 
     // Print checkboxes for status filters. 
-    echo '<form id="reportform" method="get" action="'. $baseurl . '" >';
-    echo ' <div>';
+    echo '<form id="reportform" method="get" action="'. $baseurl . '" class="form-inline" >';
     echo get_string('showjobswithstatus', 'report_offlinequizcron') . ': &nbsp;&nbsp;&nbsp;';
     foreach ($statusvalues as $name => $value) {
         if ($value) {
@@ -164,9 +163,13 @@ function offlinequizcron_display_job_list() {
         }
         echo '<input type="checkbox" name="' . $name .'" value="1" ' . $checked . '/>' . get_string($name, 'report_offlinequizcron') . '&nbsp;&nbsp;&nbsp;&nbsp;';
     }
+    echo '<br/><div class="form-group ">';
+    echo '   <label for="search">' . get_string('search', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
+    echo '   <input type="text" id="search" name="searchterm" size="20" class="form-control" value="' . $searchterm . '" />';
+    echo '</div';
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-    echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" />';
-    echo '</div></form><br/>';
+    echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" class="btn btn-secondary" />';
+    echo '</form><br/>';
 
     echo '<a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">' .
             '<label class="processqueue">' . get_string('processqueue', 'report_offlinequizcron') . '</label></a><br/>';
@@ -202,9 +205,10 @@ function offlinequizcron_display_job_list() {
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
               JOIN {course} c on oq.course = c.id
               JOIN {user} u on oqq.importuserid = u.id
-             WHERE 1=1
+              WHERE 1=1
              ";
-
+    
+    
     $countsql = "SELECT COUNT(oqq.id)
                    FROM {offlinequiz_queue} oqq
                    JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
@@ -213,7 +217,9 @@ function offlinequizcron_display_job_list() {
                   WHERE 1=1
                   ";
 
+    
     $sqlparams = array();
+
 
     if ($statusnew || $statusfinished || $statusprocessing) {
         $statuses = array();
@@ -232,12 +238,20 @@ function offlinequizcron_display_job_list() {
         $sqlparams = $sparams;
     }
 
+    if($searchterm) {
+    	$countsql .= ' AND ( oq.name LIKE ? OR c.shortname LIKE ? OR CONCAT(u.firstname, \' \', u.lastname) LIKE ? )';
+    	$sql .= ' AND ( oq.name LIKE ? OR c.shortname LIKE ? OR CONCAT(u.firstname,  \' \', u.lastname) LIKE ? )';
+    	$sqlparams[count($sqlparams)] = '%' . $searchterm . '%';
+    	$sqlparams[count($sqlparams)] = '%' . $searchterm . '%';
+    	$sqlparams[count($sqlparams)] = '%' . $searchterm . '%';
+    }
+    
     if ($sort) {
         $sql .= "ORDER BY $sort";
     } else {
         $sql .= "ORDER BY id DESC";
     }
-
+	
     $total = $DB->count_records_sql($countsql, $sqlparams);
     $table->pagesize($pagesize, $total);
 
