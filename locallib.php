@@ -104,15 +104,18 @@ class offlinequizcron_job_files_table extends flexible_table {
         echo '<div class="commandsdiv">';
         echo '<table id="commands" algin="left">';
         echo ' <tr><td>';
-        echo '  <a href="javascript:select_all_in(\'FORM\',null, \'filesform\');">'. $strselectall . '</a> / ';
-        echo '  <a href="javascript:deselect_all_in(\'FORM\',null,\'filesform\');">' . $strselectnone . '</a> ';
+        echo '  <a href="#" id="filesform-select">'. $strselectall . '</a> / ';
+        echo '  <a href="#" id="filesform-deselect">' . $strselectnone . '</a> ';
         echo '  &nbsp;&nbsp;';
-        echo '  <input type="submit" value="' . get_string('downloadselected', 'report_offlinequizcron') . '"/>';
+        echo '  <input type="submit" class="btn btn-secondary" value="' . get_string('downloadselected', 'report_offlinequizcron') . '"/>';
         echo '  </td></tr></table>';
         echo ' </form>';
         echo '</div>'; // tablecontainer
         // Close form
         echo '</center>';
+        echo '<script> Y.one(\'#filesform-deselect\').on(\'click\', function() {Y.all(\'.filesformcheckbox\').set(\'checked\', \'\');});';
+        echo 'Y.one(\'#filesform-select\').on(\'click\', function() {Y.all(\'.filesformcheckbox\').set(\'checked\', \'true\');});';
+		echo '</script>';
     }
 } // end class
 
@@ -390,7 +393,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
     echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
-    echo ' <input type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
+    echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
              '" ' . $disabled . '"/>';
     echo '</form>';
     echo '</div>';
@@ -405,7 +408,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
     echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
-    echo ' <input type="submit" value="' . get_string('deletejob', 'report_offlinequizcron') . '" />';
+    echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('deletejob', 'report_offlinequizcron') . '" />';
     echo '</form>';
     echo '</div>';
 
@@ -414,7 +417,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo '<form id="reportform" method="post" action="'. $downloadurl . '" >';
     echo ' <input type="hidden" name="jobid" value="' . $job->id . '" />';
     echo ' <input type="hidden" name="downloadall" value="1" />';	
-    echo ' <input type="submit" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" ' .
+    echo ' <input type="submit" class="btn btn-secondary" value="' . get_string('downloadallfiles', 'report_offlinequizcron') . '" ' .
         $disabled . '/>';
     echo '</form>';
     echo '</div>';
@@ -469,7 +472,7 @@ function offlinequizcron_display_job_details($jobid) {
         }
 
         if (file_exists($file->filename)) {
-            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" />';
+            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" class="filesformcheckbox"/>';
             $table->add_data(array(
                     $checkbox,
                     $file->id,
@@ -478,7 +481,7 @@ function offlinequizcron_display_job_details($jobid) {
                     $error
             ));
         } else {
-            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" disabled="disabled" />';
+            $checkbox = '<input type="checkbox" name="fileids' . $file->id . '" value="' . $file->id . '" disabled="disabled" class="filesformcheckbox" />';
             $table->add_data(array(
                     $checkbox,
                     $file->id,

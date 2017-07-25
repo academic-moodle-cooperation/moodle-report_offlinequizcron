@@ -1,0 +1,57 @@
+CHANGELOG
+=========
+
+
+3.3.0 (2017-07-25)
+------------------
+
+* Moodle 3.3 compatible version
+* [FEATURE] #3725: Searchfunction in the cronjob-table
+* [FEATURE] Boost-theme-compability
+
+
+3.2.0 (2017-02-11)
+------------------
+
+* Moodle 3.2 compatible version
+
+3.1.0 (2016-07-12)
+------------------
+
+* Moodle 3.1 compatible version
+
+
+3.0.0 (2016-03-14)
+------------------
+
+* Moodle 3.0 compatible version
+
+
+2.9.0 (2016-01-20)
+------------------
+
+* Moodle 2.9 compatible version
+* [FEATURE] #2442 Link and script to start cronjob manually
+
+2.8.0 (2015-07-15)
+------------------
+
+* Moodle 2.8 compatible version
+
+
+2.7 (2015-01-14)
+----------------
+
+* Moodle 2.7 compatible version
+
+2.6 (2014-06-24)
+----------------
+
+* Moodle 2.6 compatible version
+* [FIXED] #1691 Wrong timefinish
+
+
+2.5 (2014-02-04)
+----------------
+
+* First release for Moodle 2.5
