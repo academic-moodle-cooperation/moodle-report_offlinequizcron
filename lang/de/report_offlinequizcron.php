@@ -33,6 +33,7 @@ $string['deletejobcheck'] = 'Wollen Sie diesen Job wirklich löschen?';
 $string['downloadallfiles'] = 'Alle Dateien herunterladen';
 $string['downloadselected'] = 'Ausgewählte Dateien herunterladen';
 $string['error'] = 'Fehler';
+$string['evaluatedfiles'] = 'Anzahl ausgewerteter Dateien';
 $string['filename'] = 'Dateiname';
 $string['files'] = 'Bilddateien';
 $string['files_help'] = 'Die Tabelle zeigt die Einträge der Datenbank-Tabelle {offlinequiz_queue_data}.';

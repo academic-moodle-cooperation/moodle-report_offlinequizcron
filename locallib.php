@@ -113,8 +113,8 @@ class offlinequizcron_job_files_table extends flexible_table {
         echo '</div>'; // tablecontainer
         // Close form
         echo '</center>';
-        echo '<script> Y.one(\'#filesform-deselect\').on(\'click\', function() {Y.all(\'.filesformcheckbox\').set(\'checked\', \'\');});';
-        echo 'Y.one(\'#filesform-select\').on(\'click\', function() {Y.all(\'.filesformcheckbox\').set(\'checked\', \'true\');});';
+        echo '<script> Y.one(\'#filesform-deselect\').on(\'click\', function(evt) {evt.preventDefault();Y.all(\'.filesformcheckbox\').set(\'checked\', \'\');});';
+        echo 'Y.one(\'#filesform-select\').on(\'click\', function(evt) {evt.preventDefault();Y.all(\'.filesformcheckbox\').set(\'checked\', \'true\');});';
 		echo '</script>';
     }
 } // end class
@@ -350,7 +350,9 @@ function offlinequizcron_display_job_details($jobid) {
     if (!$job = $DB->get_record_sql($sql, $params)) {
         redirect($CFG->wwwroot . '/report/offlinequizcron/index.php');
     }
-
+	
+    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
+    
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
     echo $OUTPUT->heading(get_string('offlinequizjobdetails', 'report_offlinequizcron', $job->id));
@@ -376,9 +378,10 @@ function offlinequizcron_display_job_details($jobid) {
     $detailstable->data[] = array(get_string('timecreated', 'report_offlinequizcron'), $job->jobtimecreated > 0 ? userdate($job->jobtimecreated, $strtimeformat) : '');
     $detailstable->data[] = array(get_string('timestart', 'report_offlinequizcron'), $job->jobtimestart > 0 ? userdate($job->jobtimestart, $strtimeformat) : '');
     $detailstable->data[] = array(get_string('timefinish', 'report_offlinequizcron'), $job->jobtimefinish > 0 ? userdate($job->jobtimefinish , $strtimeformat) : '');
+    $detailstable->data[] = array(get_string('evaluatedfiles', 'report_offlinequizcron'), $total);
     echo html_writer::table($detailstable);
 
-    $total = $DB->count_records('offlinequiz_queue_data', array('queueid' => $jobid));
+
     $disabled = '';
     if (!$total) {
         $disabled = 'disabled="disabled"';
@@ -430,8 +433,10 @@ function offlinequizcron_display_job_details($jobid) {
 
     $tablecolumns = array('checkbox', 'id', 'filename', 'status', 'error');
     $tableheaders = array(
-            '<input type="checkbox" name="toggle" onClick="if (this.checked) {select_all_in(\'DIV\',null,\'tablecontainer\');}
-                else {deselect_all_in(\'DIV\',null,\'tablecontainer\');}"/>',
+    		html_writer::empty_tag('input',['type'=>'checkbox','name'=>'toggle','onClick'=>'if (this.checked) {$(\'.filesformcheckbox\').prop(\'checked\', true);}
+                else {$(\'.filesformcheckbox\').prop(\'checked\', false);}']),
+//             '<input type="checkbox" name="toggle" onClick="if (this.checked) {$(\'.filesformcheckbox\').prop(\'checked\', true);}
+//                 else {$(\'.filesformcheckbox\').prop(\'checked\', false);"/>',
             get_string('jobid', 'report_offlinequizcron'),
             get_string('filename', 'report_offlinequizcron'),
             get_string('status', 'report_offlinequizcron'),

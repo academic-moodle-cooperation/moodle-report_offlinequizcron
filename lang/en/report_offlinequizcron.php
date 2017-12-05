@@ -33,6 +33,7 @@ $string['deletejobcheck'] = 'Do you really want to delete the job?';
 $string['downloadallfiles'] = 'Download All Files As ZIP';
 $string['downloadselected'] = 'Download Selected Files As ZIP';
 $string['error'] = 'Error';
+$string['evaluatedfiles'] = 'Amount of evaluated files';
 $string['filename'] = 'Filename';
 $string['files'] = 'Image Files';
 $string['files_help'] = 'Below is the list of files in the DB table {offlinequiz_queue_data}.';

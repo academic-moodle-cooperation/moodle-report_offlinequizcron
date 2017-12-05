@@ -25,7 +25,7 @@
  * @license       http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  *
  **/
-
+define('NO_OUTPUT_BUFFERING', true);
 require(dirname(__FILE__).'/../../config.php');
 require_once($CFG->dirroot . '/report/offlinequizcron/locallib.php');
 require_once($CFG->dirroot . '/mod/offlinequiz/cron.php');
@@ -40,7 +40,6 @@ echo $OUTPUT->heading(get_string('processingqueue', 'report_offlinequizcron'));
 echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
 echo '<br/><br/>';
-ob_flush();
 
 offlinequiz_evaluation_cron(0, true);
 
