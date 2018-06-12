@@ -48,6 +48,7 @@ $string['offlinequizjobs'] = 'List of offline quiz evaluation jobs';
 $string['offlinequizjobs_help'] = 'Below is the list of jobs in the DB table {offlinequiz_queue}.';
 $string['pagesize'] = 'Number of jobs per page';
 $string['pluginname'] = 'Offlinequiz Cronjob Admin';
+$string['privacy:metadata'] = 'The offlinequizcron is only used for displaying the information of the queues of the plugin mod_offlinequiz. It does not store any data itself.';
 $string['processqueue'] = 'Process Queue';
 $string['processingqueue'] = 'Processing Queue';
 $string['reportsettings'] = 'Report settings';
