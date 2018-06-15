@@ -169,7 +169,7 @@ function offlinequizcron_display_job_list() {
     echo '<br/><div class="form-group ">';
     echo '   <label for="search">' . get_string('search', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
     echo '   <input type="text" id="search" name="searchterm" size="20" class="form-control" value="' . $searchterm . '" />';
-    echo '</div';
+    echo '</div>';
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
     echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" class="btn btn-secondary" />';
     echo '</form><br/>';
