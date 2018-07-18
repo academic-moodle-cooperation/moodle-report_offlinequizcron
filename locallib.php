@@ -156,7 +156,7 @@ function offlinequizcron_display_job_list() {
     $statusvalues = array('statusnew' => $statusnew, 'statusprocessing' => $statusprocessing, 'statusfinished' => $statusfinished);
 
     // Print checkboxes for status filters. 
-    echo '<form id="reportform" method="get" action="'. $baseurl . '" class="form-inline" >';
+    echo '<form id="reportform" method="get" action="'. $baseurl . '" class="form" >';
     echo get_string('showjobswithstatus', 'report_offlinequizcron') . ': &nbsp;&nbsp;&nbsp;';
     foreach ($statusvalues as $name => $value) {
         if ($value) {
@@ -168,10 +168,11 @@ function offlinequizcron_display_job_list() {
     }
     echo '<br/><div class="form-group ">';
     echo '   <label for="search">' . get_string('search', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
-    echo '   <input type="text" id="search" name="searchterm" size="20" class="form-control" value="' . $searchterm . '" />';
+    echo '   <input type="text" id="search" name="searchterm" size="20" class="" value="' . $searchterm . '" />';
+    echo '   <input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" class="btn btn-secondary" />';
     echo '</div>';
     echo '<input type="hidden" name="sesskey" value="' . sesskey() . '" />';
-    echo '<input type="submit" value="' . get_string('apply', 'report_offlinequizcron') . '" class="btn btn-secondary" />';
+
     echo '</form><br/>';
 
     echo '<a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">' .
@@ -300,6 +301,25 @@ function offlinequizcron_display_job_list() {
     echo $OUTPUT->box_end();
 }
 
+function get_status_sql($statusnumber) {
+	switch($statusnumber) {
+		case 1:
+			return " AND oqd.status = 'error' ";
+		case 2:
+			return " AND oqd.status = 'processed' ";
+		default:
+			return "";
+	}
+}
+
+function get_option($option, $optionselected) {
+	if($option==$optionselected) {
+		return '<option value="' .$option . '" selected="true">';
+	} else {
+		return '<option value="' .$option . '">';
+	}
+}
+
 /**
  * Displays the list of files of an evaluation cronjob.  
  */
@@ -310,9 +330,10 @@ function offlinequizcron_display_job_details($jobid) {
     $statusnew = optional_param('statusnew', 0, PARAM_INT);
     $statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
     $statusfinished = optional_param('statusfinished', 0, PARAM_INT);
+    $statusselected = optional_param('statusselected', 0, PARAM_INT);
 
     $pagesize = optional_param('pagesize', 20, PARAM_INT);
-    if ($pagesize < 1) {
+    if ($pagesize < 10) {
         $pagesize = 10;
     }
 
@@ -344,6 +365,7 @@ function offlinequizcron_display_job_details($jobid) {
               JOIN {user} u on oqq.importuserid = u.id
              WHERE oqq.id = :jobid
               ";
+
 
     $params = array('jobid' => $jobid);
 
@@ -396,6 +418,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
     echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
+    echo ' <input type="hidden" name="statusselected" value="' . $statusselected . '" />';
     echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
              '" ' . $disabled . '"/>';
     echo '</form>';
@@ -411,6 +434,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
     echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
+    echo ' <input type="hidden" name="statusselected" value="' . $statusselected . '" />';
     echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('deletejob', 'report_offlinequizcron') . '" />';
     echo '</form>';
     echo '</div>';
@@ -456,6 +480,9 @@ function offlinequizcron_display_job_details($jobid) {
 
     $sqlparams = array('queueid' => $jobid);
 
+    
+    $sql .= get_status_sql($statusselected);
+    
     $sort = $table->get_sql_sort();
     if ($sort) {
         $sql .= "ORDER BY $sort";
@@ -505,6 +532,13 @@ function offlinequizcron_display_job_details($jobid) {
     echo '   <input type="hidden" id="jobid" name="jobid" value="' . $job->id . '" />';
     echo '   <label for="pagesize">' . get_string('pagesize', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
     echo '   <input type="text" id="pagesize" name="pagesize" size="3" value="' . $pagesize . '" />';
+    echo '   <label for="statusselected" > ' . get_string('status', 'report_offlinequizcron') . "</label>";
+    echo '   <select id="statusselected" name="statusselected"/>';
+    echo '      ' . get_option(0,$statusselected) . get_string('statusall', 'report_offlinequizcron') . '</option>';
+    echo '      ' . get_option(1,$statusselected) . get_string('statuserror', 'report_offlinequizcron') . '</option>';
+    echo '      ' . get_option(2,$statusselected) . get_string('statusprocessed', 'report_offlinequizcron') . '</option>';
+    echo '   </select>';
+    echo '   <input type="submit" id="submit" />';
     echo ' </form>';
     echo '</div><br/>';
 
