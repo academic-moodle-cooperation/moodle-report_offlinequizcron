@@ -7,7 +7,7 @@ CHANGELOG
 
 3.4.0 (2017-12-05)
 ------------------
-* Moodle 3.3 compatible version
+* Moodle 3.4 compatible version
 * fixed select all button
 * added additional row for amount of uploaded answer forms on the details page
 
