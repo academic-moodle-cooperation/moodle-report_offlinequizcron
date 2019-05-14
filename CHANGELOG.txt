@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+3.7.0 (2019-05-14)
+-----------------
+[Feature] #5984 Made compatible for Moodle 3.7
+[Feature] #6061 prepare for a public release. Hello World. I hope you like this plugin. If you find any errors please contact us :)
+
 3.6.0 (2018-12-06)
 ------------------
 * Moodle 3.6 compatible version
