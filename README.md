@@ -28,15 +28,12 @@ Installation
 
 * Open the administration area (http://your-moodle-site/admin) to start the installation
   automatically.
-
-
+  
 Documentation
--------------
+------------
 
-You can find a cheat sheet for the plugin on the [AMC
-website](http://www.academic-moodle-cooperation.org/en/modules/checkmark/) and a video tutorial in
-german only in the [AMC YouTube Channel](https://www.youtube.com/c/AMCAcademicMoodleCooperatio).
-
+You can find the report in the admin interface in moodle under Administration / Reports / Offlinequiz Cronjob Admin.
+When you enter the page you get an interface to search for new/pending/finished jobs. You also have a searchbar to search for users who uploaded the file. By clicking on an ID you have the chance to download the files of the job, resent it or delete it entirely if you had problems with it.
 
 
 License
