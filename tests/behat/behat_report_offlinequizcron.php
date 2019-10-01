@@ -17,7 +17,7 @@
 /**
  * Step definitions for offlinequizcron behat features.
  *
- * @package       report
+ * @package       report_offlinequizcron
  * @subpackage    offlinequizcron
  * @author        Martin Reichel <reichem9@univie.ac.at>
  * @copyright     2019 Academic Moodle Cooperation {@link http://www.academic-moodle-cooperation.org}
