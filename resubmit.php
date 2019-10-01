@@ -51,14 +51,14 @@ if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))
     $job->timestart = 0;
     $job->timefinish = 0;
     $DB->update_record('offlinequiz_queue', $job);
-    
+
     foreach($files as $file) {
         $file->status = 'new';
         $file->error = null;
         $DB->update_record('offlinequiz_queue_data', $file);
     }
     redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize' => $pagesize,
-    		          'statusnew' => $statusnew,
+                      'statusnew' => $statusnew,
                       'statusprocessing' => $statusprocessing,
                       'statusfinished' => $statusfinished)));
 }

@@ -41,9 +41,9 @@ $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/sty
 // Prepare the list of capabilities to choose from
 
 if ($jobid) {
-    offlinequizcron_display_job_details($jobid); 
+    offlinequizcron_display_job_details($jobid);
 } else {
-    offlinequizcron_display_job_list();    
+    offlinequizcron_display_job_list();
 }
 
 // Footer.
