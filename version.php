@@ -17,8 +17,7 @@
 /**
  * The admin interface for the offlinequiz evaluation cronjob.
  *
- * @package       report
- * @subpackage    offlinequizcron
+ * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3

@@ -39,26 +39,46 @@ require_once($CFG->libdir . '/tablelib.php');
  */
 class offlinequizcron_jobs_table extends flexible_table {
 
+    /**
+     * @var $reportscript
+     */
     protected $reportscript;
+    /**
+     * @var $params
+     */
     protected $params;
 
+    /**
+     * offlinequizcron_jobs_table constructor.
+     *
+     * @param int $uniqueid Id of the respective offline quiz
+     */
     public function __construct($uniqueid) {
         parent::__construct($uniqueid);
     }
 
+    /**
+     * A function that always returns null
+     *
+     */
     public function print_nothing_to_display() {
         global $OUTPUT;
         return;
     }
 
+    /**
+     * Generates start tags
+     */
     public function wrap_html_start() {
         echo '<div id="tablecontainer" class="centerbox">';
         echo '<center>';
     }
 
+    /**
+     * Generates end tags
+     */
     public function wrap_html_finish() {
         echo '  </center>';
-        // Close form
         echo ' </div>';
     }
 } // end class
@@ -71,21 +91,40 @@ class offlinequizcron_jobs_table extends flexible_table {
  */
 class offlinequizcron_job_files_table extends flexible_table {
 
+    /**
+     * @var $reportscript
+     */
     protected $reportscript;
+    /**
+     * @var $params
+     */
     protected $params;
 
-
+    /**
+     * offlinequizcron_job_files_table constructor.
+     *
+     * @param $uniqueid
+     * @param $reportscript
+     * @param $params
+     */
     public function __construct($uniqueid, $reportscript, $params) {
         parent::__construct($uniqueid);
         $this->reportscript = $reportscript;
         $this->params = $params;
     }
 
+    /**
+     * A function that always returns null
+     */
     public function print_nothing_to_display() {
         global $OUTPUT;
         echo $OUTPUT->heading(get_string('nofiles', 'report_offlinequizcron'), 3);
         return;
     }
+
+    /**
+     * Generates start tags
+     */
     public function wrap_html_start() {
         echo '<br/><center>';
         echo '<div id="tablecontainer" class="filestable">';
@@ -97,6 +136,9 @@ class offlinequizcron_job_files_table extends flexible_table {
         echo '  <input type="hidden" name="sesskey" value="' . sesskey() . '" />';
     }
 
+    /**
+     * Generates end tags
+     */
     public function wrap_html_finish() {
         $strselectall = get_string('selectall', 'offlinequiz');
         $strselectnone = get_string('selectnone', 'offlinequiz');
@@ -175,9 +217,9 @@ function offlinequizcron_display_job_list() {
 
     echo '</form><br/>';
 
-    echo '<label class="processqueue"><a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">' 
+    echo '<label class="processqueue"><a href="' . $CFG->wwwroot . '/report/offlinequizcron/processqueue.php">'
              . get_string('processqueue', 'report_offlinequizcron') . '</a></label><br/>';
-    
+
     // Print the table of offlinequiz evaluation jobs.
     $table = new offlinequizcron_jobs_table('offlinequizcronadmin');
 
@@ -301,6 +343,12 @@ function offlinequizcron_display_job_list() {
     echo $OUTPUT->box_end();
 }
 
+/**
+ * Resolves a given sql status number with a string definition
+ *
+ * @param $statusnumber
+ * @return string
+ */
 function get_status_sql($statusnumber) {
 	switch($statusnumber) {
 		case 1:
@@ -312,6 +360,13 @@ function get_status_sql($statusnumber) {
 	}
 }
 
+/**
+ * Returns the tag of the selected option
+ *
+ * @param $option
+ * @param $optionselected
+ * @return string
+ */
 function get_option($option, $optionselected) {
 	if($option==$optionselected) {
 		return '<option value="' .$option . '" selected="true">';
