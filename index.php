@@ -1,5 +1,5 @@
 <?php
-// This file is for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -34,11 +34,6 @@ $jobid = optional_param('jobid', 0, PARAM_INT);
 // Print the header & check permissions.
 admin_externalpage_setup('reportofflinequizcron', '', null, '', array('pagelayout' => 'report'));
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
-
-// Log.
-// add_to_log(SITEID, "admin", "report offlinequizcron", "report/offlinequizcron/index.php?jobid=$jobid", $jobid);
-
-// Prepare the list of capabilities to choose from
 
 if ($jobid) {
     offlinequizcron_display_job_details($jobid);

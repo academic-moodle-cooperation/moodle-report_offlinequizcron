@@ -52,7 +52,7 @@ if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))
     $job->timefinish = 0;
     $DB->update_record('offlinequiz_queue', $job);
 
-    foreach($files as $file) {
+    foreach ($files as $file) {
         $file->status = 'new';
         $file->error = null;
         $DB->update_record('offlinequiz_queue_data', $file);

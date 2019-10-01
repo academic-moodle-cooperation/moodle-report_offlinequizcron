@@ -1,5 +1,5 @@
 <?php
-// This file is for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -36,7 +36,8 @@ $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/sty
 echo $OUTPUT->header();
 echo $OUTPUT->box_start('centerbox');
 echo $OUTPUT->heading(get_string('processingqueue', 'report_offlinequizcron'));
-echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
+echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php',
+        get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
 echo '<br/><br/>';
 
@@ -44,7 +45,8 @@ offlinequiz_evaluation_cron(0, true);
 
 echo '<br/><br/>';
 
-echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php', get_string('backtomainpage', 'report_offlinequizcron'),
+echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php',
+        get_string('backtomainpage', 'report_offlinequizcron'),
     null, array('class' => 'backtomainlink'));
 echo $OUTPUT->box_end();
 // Footer.
