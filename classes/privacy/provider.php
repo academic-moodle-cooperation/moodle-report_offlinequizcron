@@ -1,7 +1,7 @@
 <?php
 /**
  * The privacy provider file for offlinequizcron
- * *
+ *
  * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
