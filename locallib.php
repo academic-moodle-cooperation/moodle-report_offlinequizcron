@@ -17,8 +17,7 @@
 /**
  * Useful functions for the offlinequiz evaluation cronjob admin interface.
  *
- * @package       report
- * @subpackage    offlinequizcron
+ * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3
@@ -103,9 +102,9 @@ class offlinequizcron_job_files_table extends flexible_table {
     /**
      * offlinequizcron_job_files_table constructor.
      *
-     * @param $uniqueid
-     * @param $reportscript
-     * @param $params
+     * @param int $uniqueid
+     * @param string $reportscript
+     * @param string|array $params
      */
     public function __construct($uniqueid, $reportscript, $params) {
         parent::__construct($uniqueid);
@@ -346,7 +345,7 @@ function offlinequizcron_display_job_list() {
 /**
  * Resolves a given sql status number with a string definition
  *
- * @param $statusnumber
+ * @param int $statusnumber
  * @return string
  */
 function get_status_sql($statusnumber) {
@@ -363,8 +362,8 @@ function get_status_sql($statusnumber) {
 /**
  * Returns the tag of the selected option
  *
- * @param $option
- * @param $optionselected
+ * @param string $option
+ * @param string $optionselected
  * @return string
  */
 function get_option($option, $optionselected) {
@@ -376,7 +375,12 @@ function get_option($option, $optionselected) {
 }
 
 /**
- * Displays the list of files of an evaluation cronjob.  
+ * Displays the list of files of an evaluation cronjob.
+ *
+ * @param int $jobid
+ * @throws coding_exception
+ * @throws dml_exception
+ * @throws moodle_exception
  */
 function offlinequizcron_display_job_details($jobid) {
     global $CFG, $DB, $OUTPUT;
@@ -392,8 +396,7 @@ function offlinequizcron_display_job_details($jobid) {
         $pagesize = 10;
     }
 
-
-    // Delete a job from the DB. 
+    // Delete a job from the DB.
     if ($deleteid && $deletejob = $DB->get_record('offlinequiz_queue', array('id' => $deleteid))) {
         if ($files = $DB->get_records('offlinequiz_queue_data', array('queueid' => $deletejob->id))) {
             $file = array_pop($files);
