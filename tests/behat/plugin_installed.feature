@@ -1,4 +1,4 @@
-@mod @mod_offlinequizcron @
+@mod @mod_offlinequizcron @javascript
 Feature: Within a moodle instance, an administrator should be able to have an overview of all evaluated jobs of scanned answer forms.
   In order to administrate scan jobs of the offline quiz
   As an administrator
