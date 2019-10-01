@@ -1,5 +1,5 @@
 <?php
-// This file is for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,7 @@
 /**
  * Download script for the offlinequiz evaluation cronjob.
  *
- * @package       report
- * @subpackage    offlinequizcron
+ * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3
@@ -31,13 +30,13 @@ require_once($CFG->libdir . '/filelib.php');
 
 $fileid = optional_param('fileid', 0, PARAM_INT);
 $jobid = optional_param('jobid', 0, PARAM_INT);
-$downloadall = optional_param('downloadall', 0, PARAM_INT);	
+$downloadall = optional_param('downloadall', 0, PARAM_INT);
 
 require_login();
 
 if (!has_capability('moodle/site:config', context_system::instance())) {
     // The requested section could depend on a different capability
-    // but most likely the user has inadequate capabilities
+    // but most likely the user has inadequate capabilities.
     print_error('accessdenied', 'admin');
     die;
 }
@@ -60,7 +59,7 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
     $zipfilename = $shortname . '_' . $offlinequiz->name;
 
     $filelist = array();
-    
+
     foreach ($files as $file) {
         if (file_exists($file->filename)) {
             $pathparts = pathinfo($file->filename);
@@ -78,16 +77,16 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
     // Download selected files as a ZIP archive.
     $rawdata = (array) data_submitted();
     $fileids = array();
-    
+
     foreach ($rawdata as $key => $value) {
         if (preg_match('!^fileids([0-9]+)$!', $key)) {
             $fileids[] = clean_param($value, PARAM_INT);
         }
     }
-    
+
     if (!empty($fileids)) {
         require_once($CFG->libdir . '/filestorage/zip_packer.php');
-        
+
         $filelist = array();
         foreach ($fileids as $fileid) {
             $file = $DB->get_record('offlinequiz_queue_data', array('id' => $fileid));
@@ -96,18 +95,18 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
                 $filelist[$pathparts['basename']] = $file->filename;
             }
         }
-        
+
         $jobid = $DB->get_field('offlinequiz_queue_data', 'queueid', array('id' => $fileids[0]));
         $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', array('id' => $jobid));
         $offlinequiz = $DB->get_record('offlinequiz', array('id' => $offlinequizid));
         $shortname = $DB->get_field('course', 'shortname', array('id' => $offlinequiz->course));
         $zipfilename = $shortname . '_' . $offlinequiz->name;
-        
+
         $zipper = new zip_packer();
         $tempzip = tempnam($CFG->tempdir . '/', 'offlinequizcronfiles');
 
         if ($zipper->archive_to_pathname($filelist, $tempzip)) {
-	    	send_temp_file($tempzip, clean_filename($zipfilename) . '.zip');
+            send_temp_file($tempzip, clean_filename($zipfilename) . '.zip');
         }
-    } 
+    }
 }
