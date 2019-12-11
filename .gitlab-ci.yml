@@ -28,7 +28,7 @@ before_script:
     - moodle-plugin-ci codechecker
     - moodle-plugin-ci validate
     - moodle-plugin-ci phpunit
-    #- moodle-plugin-ci behat       AT THE MOMENT THE ACCEPTANCE TEST IS OUTCOMMENTED BECAUSE AN INSTALLED MOD_OFFLINEQUZ IS REQUIRED
+    - moodle-plugin-ci behat
 
 code_checker:
   <<: *job_definition
