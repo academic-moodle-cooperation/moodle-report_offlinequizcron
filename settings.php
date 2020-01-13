@@ -1,5 +1,5 @@
 <?php
-// This file is for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,7 @@
 /**
  * The admin interface for the offlinequiz evaluation cronjob.
  *
- * @package       report
- * @subpackage    offlinequizcron
+ * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3

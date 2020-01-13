@@ -1,5 +1,5 @@
 <?php
-// This file is for Moodle - http://moodle.org/
+// This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,8 +17,7 @@
 /**
  * The admin interface for the offlinequiz evaluation cronjob.
  *
- * @package       report
- * @subpackage    offlinequizcron
+ * @package       report_offlinequizcron
  * @author        Juergen Zimmer
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3
@@ -32,5 +31,5 @@ $plugin->version   = 2020011400;                 // The current plugin version (
 $plugin->release   = "v3.8.0";      // User-friendly version number.
 $plugin->requires  = 2019111800;                 // Requires this Moodle version
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->component = 'report_offlinequizcron';   // Full name of the plugin (used for diagnostics)
+$plugin->component = 'report_offlinequizcron';   // Full name of the plugin (used for diagnostics).
 $plugin->dependencies = array('mod_offlinequiz' => 2019051100);
