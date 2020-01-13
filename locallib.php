@@ -538,7 +538,7 @@ function offlinequizcron_display_job_details($jobid) {
     echo '      ' . get_option(1,$statusselected) . get_string('statuserror', 'report_offlinequizcron') . '</option>';
     echo '      ' . get_option(2,$statusselected) . get_string('statusprocessed', 'report_offlinequizcron') . '</option>';
     echo '   </select>';
-    echo '   <input type="submit" id="submit" />';
+    echo '   <button type="submit" id="submit" >' . get_string('submit', 'report_offlinequizcron') . '</button>';
     echo ' </form>';
     echo '</div><br/>';
 
