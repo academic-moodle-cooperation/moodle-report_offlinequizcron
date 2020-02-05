@@ -1,6 +1,7 @@
 CHANGELOG
 =========
 3.8.0 (2020-01-14)
+-----------------
 [Feature] #6315 Made compatible for Moodle 3.8
 
 3.7.0 (2019-05-14)
