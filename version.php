@@ -19,6 +19,7 @@
  *
  * @package       report_offlinequizcron
  * @author        Juergen Zimmer
+ * @author        Thomas Wedekind
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3
  * @license       http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
