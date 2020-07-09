@@ -16,7 +16,7 @@ The Offlinequiz-Cron Module adds an interface to the offlinequiz-module to see a
 Requirements
 ------------
 
-This version is for Moodle 3.8. The module mod_offlinequiz must be installed to run this plugin
+This version is for Moodle 3.9. The module mod_offlinequiz must be installed to run this plugin
 
 
 Installation
