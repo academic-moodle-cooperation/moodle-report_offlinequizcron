@@ -19,6 +19,7 @@
  *
  * @package       report_offlinequizcron
  * @author        Juergen Zimmer
+ * @author        Thomas Wedekind
  * @copyright     2013 The University of Vienna
  * @since         Moodle 2.5.3
  * @license       http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
@@ -27,9 +28,9 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2019051400;                 // The current plugin version (Date: YYYYMMDDXX).
-$plugin->release   = "v3.7.0";      // User-friendly version number.
-$plugin->requires  = 2019052000;                 // Requires this Moodle version.
+$plugin->version   = 2020110500;                 // The current plugin version (Date: YYYYMMDDXX)
+$plugin->release   = "v3.10.0";      // User-friendly version number.
+$plugin->requires  = 2020061500;                 // Requires this Moodle version
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'report_offlinequizcron';   // Full name of the plugin (used for diagnostics).
-$plugin->dependencies = array('mod_offlinequiz' => 2019051100);
+$plugin->dependencies = array('mod_offlinequiz' => 2019110500);

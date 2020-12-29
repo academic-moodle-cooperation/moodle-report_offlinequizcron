@@ -1,5 +1,17 @@
 CHANGELOG
 =========
+3.10.0 (2020-11-05)
+-----------------
+[Update] Made compatible for Moodle 3.10
+
+3.9.0 (2020-06-17)
+-----------------
+[Update] #6558 Made compatible for Moodle 3.9
+
+3.8.0 (2020-01-14)
+-----------------
+[Feature] #6315 Made compatible for Moodle 3.8
+
 3.7.0 (2019-05-14)
 -----------------
 [Feature] #5984 Made compatible for Moodle 3.7
