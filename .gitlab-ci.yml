@@ -14,6 +14,7 @@ variables:
     # Wait until database is ready
     - timeout 3m bash -c 'echo -e "DB...\c"; until </dev/tcp/127.0.0.1/5432; do echo -e ".\c"; sleep 1; done; echo "ok";' 2> /dev/null
     - cd ../..
+    - moodle-plugin-ci add-plugin --clone https://gitlab-ci-token:${CI_JOB_TOKEN}@${ADD_PLUGIN_OFFLINEQUIZ}
     - moodle-plugin-ci install --moodle="moodle-upstream-core" --db-user=moodleci --db-pass=moodleing --db-host=127.0.0.1
   services:
     - postgres:11
@@ -23,16 +24,6 @@ variables:
     DB: "pgsql"
     POSTGRES_USER: "moodleci"
     POSTGRES_PASSWORD: "moodleing"
-
-.mariadb:
-  before_script:
-    # Wait until database is ready
-    - timeout 3m bash -c 'echo -e "DB...\c"; until </dev/tcp/127.0.0.1/3306; do echo -e ".\c"; sleep 1; done; echo "ok";' 2> /dev/null
-    - cd ../..
-    - moodle-plugin-ci install --moodle="moodle-upstream-core" --db-user=root --db-pass=superrootpass --db-host=127.0.0.1
-  services:
-    - mariadb:10.4-bionic
-    - docker:dind
 
 .job_template: &job_definition
   script:
@@ -44,7 +35,7 @@ variables:
     - moodle-plugin-ci codechecker
     - moodle-plugin-ci validate
     - moodle-plugin-ci phpunit
-    #- moodle-plugin-ci behat       AT THE MOMENT THE ACCEPTANCE TEST IS OUTCOMMENTED BECAUSE AN INSTALLED MOD_OFFLINEQUZ IS REQUIRED
+    - moodle-plugin-ci behat
 
 code_checker_pgsql:
   extends: .postgres
