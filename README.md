@@ -11,7 +11,7 @@ This file is part of the report_offlinequizcron plugin for Moodle - <http://mood
 Description
 -----------
 
-The Offlinequiz-Cron Module adds an interface to the offlinequiz-module to see and change pending cronjobs in the offlinequiz
+The Offline Quiz Cron plugin (report_offlinequizcron) adds an interface to the Offline Quiz activity (mod_offlinequiz) to inspect and change pending cronjobs for the Offline Quiz.
 
 Requirements
 ------------
