@@ -16,7 +16,7 @@ The Offline Quiz Cron plugin (report_offlinequizcron) adds an interface to the O
 Requirements
 ------------
 
-This version is for Moodle 3.10. The module mod_offlinequiz must be installed to run this plugin
+The module mod_offlinequiz must be installed to run this plugin
 
 
 Installation
