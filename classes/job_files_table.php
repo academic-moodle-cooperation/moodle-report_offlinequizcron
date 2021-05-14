@@ -1,9 +1,10 @@
 <?php
 
 
-namespace report_offlinequinzcron;
+namespace report_offlinequizcron;
 
 defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir . '/tablelib.php');
 
 class job_files_table extends flexible_table {
 

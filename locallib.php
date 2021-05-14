@@ -91,7 +91,7 @@ function report_offlinequizcron_display_job_list() {
              . get_string('processqueue', 'report_offlinequizcron') . '</a></label><br/>';
 
     // Print the table of offlinequiz evaluation jobs.
-    $table = new \report_offlinequinzcron\jobs_table::create('offlinequizcronadmin');
+    $table = new \report_offlinequizcron\jobs_table('offlinequizcronadmin');
 
     $tablecolumns = array('id', 'status', 'oqname', 'cshortname', 'lastname', 'jobtimecreated', 'jobtimestart', 'jobtimefinish');
     $tableheaders = array(
@@ -382,7 +382,7 @@ function report_offlinequizcron_display_job_details($jobid) {
     echo $OUTPUT->heading_with_help(get_string('files', 'report_offlinequizcron'), 'files', 'report_offlinequizcron');
 
     // Initialise the table.
-    $table = new \report_offlinequinzcron\job_files_table::create('offlinequizcronjobfiles', $downloadurl,
+    $table = new \report_offlinequizcron\job_files_table('offlinequizcronjobfiles', $downloadurl,
             array('jobid' => $job->id, 'pagesize' => $pagesize));
 
     $tablecolumns = array('checkbox', 'id', 'filename', 'status', 'error');
