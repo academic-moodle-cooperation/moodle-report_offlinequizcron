@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * The admin interface for the offlinequiz evaluation cronjob.
+ * Useful functions for the offlinequiz evaluation cronjob admin interface.
  *
  * @package       report_offlinequizcron
  * @author        Juergen Zimmer
@@ -25,21 +25,44 @@
  *
  **/
 
-require(dirname(__FILE__).'/../../config.php');
-require_once($CFG->dirroot . '/report/offlinequizcron/locallib.php');
+namespace report_offlinequinzcron;
 
-// Get URL parameters.
-$jobid = optional_param('jobid', 0, PARAM_INT);
+defined('MOODLE_INTERNAL') || die();
 
-// Print the header & check permissions.
-admin_externalpage_setup('reportofflinequizcron', '', null, '', array('pagelayout' => 'report'));
-$PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
+class jobs_table extends flexible_table {
 
-if ($jobid) {
-    report_offlinequizcron_display_job_details($jobid);
-} else {
-    report_offlinequizcron_display_job_list();
+    /**
+     * @var $reportscript
+     */
+    protected $reportscript;
+    /**
+     * @var $params
+     */
+    protected $params;
+
+
+    /**
+     * A function that always returns null
+     *
+     */
+    public function print_nothing_to_display() {
+        global $OUTPUT;
+        return;
+    }
+
+    /**
+     * Generates start tags
+     */
+    public function wrap_html_start() {
+        echo '<div id="tablecontainer" class="centerbox">';
+        echo '<center>';
+    }
+
+    /**
+     * Generates end tags
+     */
+    public function wrap_html_finish() {
+        echo '  </center>';
+        echo ' </div>';
+    }
 }
-
-// Footer.
-echo $OUTPUT->footer();
