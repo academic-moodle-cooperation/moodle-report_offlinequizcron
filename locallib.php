@@ -28,7 +28,6 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once($CFG->libdir . '/adminlib.php');
-require_once($CFG->libdir . '/tablelib.php');
 
 /**
  * Displays the list of offlinequiz evaluation cronjobs.
