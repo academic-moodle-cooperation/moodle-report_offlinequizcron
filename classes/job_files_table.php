@@ -29,6 +29,7 @@
 namespace report_offlinequizcron;
 
 defined('MOODLE_INTERNAL') || die();
+require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->libdir . '/tablelib.php');
 
 /**
@@ -37,7 +38,7 @@ require_once($CFG->libdir . '/tablelib.php');
  * @copyright  2013 The University of Vienna
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class job_files_table extends flexible_table {
+class job_files_table extends \flexible_table {
 
     /**
      * @var $reportscript
