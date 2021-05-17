@@ -30,6 +30,12 @@ namespace report_offlinequizcron;
 defined('MOODLE_INTERNAL') || die();
 require_once($CFG->libdir . '/tablelib.php');
 
+/**
+ * Table for lists of offlinequiz evaluation cronjobs.
+ *
+ * @copyright  2013 The University of Vienna
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class jobs_table extends flexible_table {
 
     /**
