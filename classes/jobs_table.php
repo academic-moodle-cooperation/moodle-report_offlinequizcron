@@ -14,10 +14,20 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+/**
+ * Table for lists of offlinequiz evaluation cronjobs.
+ *
+ * @package       report_offlinequizcron
+ * @author        Juergen Zimmer
+ * @copyright     2013 The University of Vienna
+ * @since         Moodle 2.5.3
+ * @license       http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ *
+ **/
+
 namespace report_offlinequizcron;
 
 defined('MOODLE_INTERNAL') || die();
-require_once($CFG->libdir . '/adminlib.php');
 require_once($CFG->libdir . '/tablelib.php');
 
 /**
