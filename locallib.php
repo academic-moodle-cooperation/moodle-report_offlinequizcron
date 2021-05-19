@@ -306,7 +306,7 @@ function report_offlinequizcron_display_job_details($jobid) {
 
     $reporturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('jobid' => $job->id));
     $downloadurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/download.php');
-    $resubmiturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/resubmit.php');
+    $resubmiturl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/resubmit.php', ['sesskey' => sesskey()]);
     $offlinequizurl = new moodle_url($CFG->wwwroot . '/mod/offlinequiz/view.php', array('q' => $job->oqid));
     $courseurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $job->cid));
     $userurl = new moodle_url($CFG->wwwroot . '/user/profile.php', array('id' => $job->uid));
