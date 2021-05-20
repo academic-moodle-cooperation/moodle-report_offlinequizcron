@@ -47,7 +47,7 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
         send_file_not_found();
     } else {
         $pathparts = pathinfo($file->filename);
-        $shortname = shorten_text($pathparts['basename']);
+        $shortname = $pathparts['basename'];
         send_file($file->filename, $shortname, 'default' , 0, false, true);
     }
 } else if ($jobid && $downloadall && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))) {
