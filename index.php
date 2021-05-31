@@ -36,9 +36,9 @@ admin_externalpage_setup('reportofflinequizcron', '', null, '', array('pagelayou
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
 
 if ($jobid) {
-    offlinequizcron_display_job_details($jobid);
+    report_offlinequizcron_display_job_details($jobid);
 } else {
-    offlinequizcron_display_job_list();
+    report_offlinequizcron_display_job_list();
 }
 
 // Footer.
