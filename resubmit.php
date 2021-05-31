@@ -35,6 +35,7 @@ $statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
 $statusfinished = optional_param('statusfinished', 0, PARAM_INT);
 
 require_login();
+require_sesskey();
 
 if (!has_capability('moodle/site:config', context_system::instance())) {
     // The requested section could depend on a different capability

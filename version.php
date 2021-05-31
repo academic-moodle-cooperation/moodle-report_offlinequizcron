@@ -28,8 +28,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version   = 2020110500;                 // The current plugin version (Date: YYYYMMDDXX)
-$plugin->release   = "v3.10.0";      // User-friendly version number.
+$plugin->version   = 2020110501;                 // The current plugin version (Date: YYYYMMDDXX)
+$plugin->release   = "v3.10.1";      // User-friendly version number.
 $plugin->requires  = 2020061500;                 // Requires this Moodle version
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'report_offlinequizcron';   // Full name of the plugin (used for diagnostics).
