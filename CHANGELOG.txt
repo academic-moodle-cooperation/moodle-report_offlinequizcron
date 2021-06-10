@@ -1,21 +1,27 @@
 CHANGELOG
 =========
+3.10.1 (2021-06-10)
+-----------------
+* [FIXED] #EL-961 Fixed missing sesskey for protection of write actions
+* [FIXED] #EL-962 Fixed name style violations
+* [FIXED] #EL-982 Fixed not being able to download single image files with long file name correctly
+
 3.10.0 (2020-11-05)
 -----------------
-[Update] Made compatible for Moodle 3.10
+* [Update] Made compatible for Moodle 3.10
 
 3.9.0 (2020-06-17)
 -----------------
-[Update] #6558 Made compatible for Moodle 3.9
+* [Update] #6558 Made compatible for Moodle 3.9
 
 3.8.0 (2020-01-14)
 -----------------
-[Feature] #6315 Made compatible for Moodle 3.8
+* [Feature] #6315 Made compatible for Moodle 3.8
 
 3.7.0 (2019-05-14)
 -----------------
-[Feature] #5984 Made compatible for Moodle 3.7
-[Feature] #6061 prepare for a public release. Hello World. I hope you like this plugin. If you find any errors please contact us :)
+* [Feature] #5984 Made compatible for Moodle 3.7
+* [Feature] #6061 prepare for a public release. Hello World. I hope you like this plugin. If you find any errors please contact us :)
 
 3.6.0 (2018-12-06)
 ------------------
