@@ -35,7 +35,7 @@ require_once($CFG->libdir . '/adminlib.php');
 function report_offlinequizcron_display_job_list() {
     global $CFG, $DB, $OUTPUT;
     $searchterm = optional_param('searchterm', '', PARAM_TEXT);
-    $pagesize = optional_param('pagesize', 20, PARAM_INT);
+    $pagesize = optional_param('pagesize_jobs', 20, PARAM_INT);
     $statusnew = optional_param('statusnew', 0, PARAM_INT);
     $statusprocessing = optional_param('statusprocessing', 0, PARAM_INT);
     $statusfinished = optional_param('statusfinished', 0, PARAM_INT);
@@ -50,12 +50,12 @@ function report_offlinequizcron_display_job_list() {
         $pagesize = 10;
     }
 
-    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize' => $pagesize));
+    $baseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize_jobs' => $pagesize));
     $tablebaseurl = new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php',
             array('statusnew' => $statusnew,
                   'statusprocessing' => $statusprocessing,
                   'statusfinished' => $statusfinished,
-                  'pagesize' => $pagesize));
+                  'pagesize_jobs' => $pagesize));
 
     echo $OUTPUT->header();
     echo $OUTPUT->box_start('centerbox');
@@ -175,7 +175,7 @@ function report_offlinequizcron_display_job_list() {
                       'statusnew' => $statusnew,
                       'statusprocessing' => $statusprocessing,
                       'statusfinished' => $statusfinished,
-                      'pagesize' => $pagesize));
+                      'pagesize_jobs' => $pagesize));
         $offlinequizurl = new moodle_url($CFG->wwwroot . '/mod/offlinequiz/view.php', array('q' => $job->oqid));
         $courseurl = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $job->cid));
         $userurl = new moodle_url($CFG->wwwroot . '/user/profile.php', array('id' => $job->uid));
@@ -197,11 +197,11 @@ function report_offlinequizcron_display_job_list() {
 
     echo '<div class="controls">';
     echo ' <form id="options" action="index.php" method="get">';
-    echo '     <label for="pagesize">' . get_string('pagesize', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
+    echo '     <label for="pagesize_jobs">' . get_string('pagesize_jobs', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
     foreach ($statusvalues as $name => $value) {
         echo '     <input type="hidden" name="' . $name .'" value="' . $value . '"/>';
     }
-    echo '     <input type="text" id="pagesize" name="pagesize" size="3" value="' . $pagesize . '" />';
+    echo '     <input type="text" id="pagesize_jobs" name="pagesize_jobs" size="3" value="' . $pagesize . '" />';
     echo ' </form>';
     echo '</div>';
 
@@ -257,7 +257,7 @@ function report_offlinequizcron_display_job_details($jobid) {
     $statusfinished = optional_param('statusfinished', 0, PARAM_INT);
     $statusselected = optional_param('statusselected', 0, PARAM_INT);
 
-    $pagesize = optional_param('pagesize', 20, PARAM_INT);
+    $pagesize = optional_param('pagesize_details', 20, PARAM_INT);
     if ($pagesize < 10) {
         $pagesize = 10;
     }
@@ -275,7 +275,7 @@ function report_offlinequizcron_display_job_details($jobid) {
         redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('statusnew' => $statusnew,
                   'statusprocessing' => $statusprocessing,
                   'statusfinished' => $statusfinished,
-                  'pagesize' => $pagesize)));
+                  'pagesize_details' => $pagesize)));
     }
 
     $sql = "SELECT oqq.id, oqq.status,
@@ -344,7 +344,7 @@ function report_offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusnew" value="' .$statusnew . '" />';
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
-    echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
+    echo ' <input type="hidden" name="pagesize_details" value="' . $pagesize . '" />';
     echo ' <input type="hidden" name="statusselected" value="' . $statusselected . '" />';
     echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('resubmitjob', 'report_offlinequizcron') .
              '" ' . $disabled . '"/>';
@@ -360,7 +360,7 @@ function report_offlinequizcron_display_job_details($jobid) {
     echo ' <input type="hidden" name="statusnew" value="' .$statusnew . '" />';
     echo ' <input type="hidden" name="statusprocessing" value="' . $statusprocessing . '" />';
     echo ' <input type="hidden" name="statusfinished" value="' . $statusfinished . '" />';
-    echo ' <input type="hidden" name="pagesize" value="' . $pagesize . '" />';
+    echo ' <input type="hidden" name="pagesize_details" value="' . $pagesize . '" />';
     echo ' <input type="hidden" name="statusselected" value="' . $statusselected . '" />';
     echo ' <input class="btn btn-secondary" type="submit" value="' . get_string('deletejob', 'report_offlinequizcron') . '" />';
     echo '</form>';
@@ -396,7 +396,7 @@ function report_offlinequizcron_display_job_details($jobid) {
 
     $table->define_columns($tablecolumns);
     $table->define_headers($tableheaders);
-    $table->define_baseurl($CFG->wwwroot . '/report/offlinequizcron/index.php?jobid=' . $jobid . '&pagesize=' . $pagesize);
+    $table->define_baseurl($CFG->wwwroot . '/report/offlinequizcron/index.php?jobid=' . $jobid . '&pagesize_details=' . $pagesize);
     $table->sortable(true);
     $table->no_sorting('checkbox');
     $table->setup();
@@ -459,8 +459,8 @@ function report_offlinequizcron_display_job_details($jobid) {
     echo '<div class="controls">';
     echo ' <form id="options" action="index.php" method="get">';
     echo '   <input type="hidden" id="jobid" name="jobid" value="' . $job->id . '" />';
-    echo '   <label for="pagesize">' . get_string('pagesize', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
-    echo '   <input type="text" id="pagesize" name="pagesize" size="3" value="' . $pagesize . '" />';
+    echo '   <label for="pagesize_details">' . get_string('pagesize_details', 'report_offlinequizcron') . '</label>&nbsp;&nbsp;';
+    echo '   <input type="text" id="pagesize_details" name="pagesize_details" size="3" value="' . $pagesize . '" />';
     echo '   <label for="statusselected" > ' . get_string('status', 'report_offlinequizcron') . "</label>";
     echo '   <select id="statusselected" name="statusselected"/>';
     echo '      ' . get_option(0, $statusselected) . get_string('statusall', 'report_offlinequizcron') . '</option>';
