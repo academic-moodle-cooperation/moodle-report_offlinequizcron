@@ -1,28 +1,35 @@
-Offlinequiz-Cron Module
-================
+Offlinequiz Cronjob Admin
+================================
 
 This file is part of the report_offlinequizcron plugin for Moodle - <http://moodle.org/>
 
 *Author:*    Juergen Zimmer, Thomas Wedekind, Jakob Mischke
-*Copyright:* 2013 [Academic Moodle Cooperation](http://www.academic-moodle-cooperation.org)
+*Copyright:* [Academic Moodle Cooperation](http://www.academic-moodle-cooperation.org)
 *License:*   [GNU GPL v3 or later](http://www.gnu.org/copyleft/gpl.html)
 
 
 Description
 -----------
 
-The Offline Quiz Cron plugin (report_offlinequizcron) adds an interface to the Offline Quiz activity (mod_offlinequiz) to inspect and change pending cronjobs for the Offline Quiz.
+The Offlinequiz Cronjob Admin allows administrators to monitor and, if necessary, control important processes for the evaluation of offline quizzes in the backend of their Moodle platform.
+
+
+Usage
+-----------
+
+Teachers have carried out an exam via the offline quiz activity. During the subsequent evaluation, several sheets were not evaluated correctly and the administrator of the Moodle platform was asked for assistance. The first step is to check the activity and identify the cause. For a quick correction, the offline quiz cronjob admin is now accessed and the details of the offline quiz evaluation are opened. The relevant scanned answer sheets can be downloaded collectively and uploaded again in the offline quiz for evaluation.
+
 
 Requirements
 ------------
 
-The module mod_offlinequiz must be installed to run this plugin
+The module [mod_offlinequiz](https://moodle.org/plugins/mod_offlinequiz) must be installed to run this plugin.
 
 
 Installation
 ------------
 
-* Copy the module code directly to the report/offlinequizcron directory.
+* Copy the code directly to the report/offlinequizcron directory.
 
 * Log into Moodle as administrator.
 
@@ -30,11 +37,16 @@ Installation
   automatically.
 
 
+Privacy API
+------------
+
+The plugin fully implements the Moodle Privacy API.
+
+
 Documentation
 ------------
 
-You can find the report in the admin interface in moodle under Administration / Reports / Offlinequiz Cronjob Admin.
-When you enter the page you get an interface to search for new/pending/finished jobs. You also have a searchbar to search for users who uploaded the file. By clicking on an ID you have the chance to download the files of the job, resent it or delete it entirely if you had problems with it.
+You can find a documentation for the plugin on the [AMC website](https://academic-moodle-cooperation.org/report_offlinequizcron/).
 
 
 Bug Reports / Support
@@ -42,15 +54,11 @@ Bug Reports / Support
 
 We try our best to deliver bug-free plugins, but we cannot test the plugin for every platform,
 database, PHP and Moodle version. If you find any bug please report it on
-[GitHub](https://github.com/academic-moodle-cooperation/moodle-report_offlinequizcron/issues). Please
-provide a detailed bug description, including the plugin and Moodle version and, if applicable, a
-screenshot.
+[GitHub](https://github.com/academic-moodle-cooperation/moodle-report_offlinequizcron/issues). Please provide a detailed bug description, including the plugin and Moodle version and, if applicable, a screenshot.
 
-You may also file a request for enhancement on GitHub. If we consider the request generally useful
-and if it can be implemented with reasonable effort we might implement it in a future version.
+You may also file a request for enhancement on GitHub. If we consider the request generally useful and if it can be implemented with reasonable effort we might implement it in a future version.
 
-You may also post general questions on the plugin on GitHub, but note that we do not have the
-resources to provide detailed support.
+You may also post general questions on the plugin on GitHub, but note that we do not have the resources to provide detailed support.
 
 
 License
