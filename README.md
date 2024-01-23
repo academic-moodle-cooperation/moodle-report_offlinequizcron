@@ -4,7 +4,9 @@ Offlinequiz Cronjob Admin
 This file is part of the report_offlinequizcron plugin for Moodle - <http://moodle.org/>
 
 *Author:*    Juergen Zimmer, Thomas Wedekind, Jakob Mischke
+
 *Copyright:* [Academic Moodle Cooperation](http://www.academic-moodle-cooperation.org)
+
 *License:*   [GNU GPL v3 or later](http://www.gnu.org/copyleft/gpl.html)
 
 
