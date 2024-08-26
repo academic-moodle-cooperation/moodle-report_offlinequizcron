@@ -34,4 +34,4 @@ $plugin->release   = "v4.4.0";      // User-friendly version number.
 $plugin->requires  = 2024042200;                 // Requires this Moodle version
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'report_offlinequizcron';   // Full name of the plugin (used for diagnostics).
-$plugin->dependencies = array('mod_offlinequiz' => 2019110500);
+$plugin->dependencies = ['mod_offlinequiz' => 2019110500];
