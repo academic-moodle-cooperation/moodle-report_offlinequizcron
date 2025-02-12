@@ -387,8 +387,7 @@ function report_offlinequizcron_display_job_details($jobid) {
     $tablecolumns = array('checkbox', 'id', 'filename', 'status', 'error');
     $tableheaders = array(
             html_writer::empty_tag('input', ['type' => 'checkbox', 'name' => 'toggle',
-                    'onClick' => 'if (this.checked) {$(\'.filesformcheckbox\').prop(\'checked\', true);}
-                else {$(\'.filesformcheckbox\').prop(\'checked\', false);}']),
+                    'onClick' => 'elements = document.getElementsByClassName("filesformcheckbox");for(var i=0, n=elements.length;i<n;i++){elements[i].checked=this.checked;}']),
             get_string('jobid', 'report_offlinequizcron'),
             get_string('filename', 'report_offlinequizcron'),
             get_string('status', 'report_offlinequizcron'),
