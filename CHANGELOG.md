@@ -1,9 +1,13 @@
 CHANGELOG
 =========
+
+5.0.0
+-----------------
+[Update] Made compatible for Moodle 5.0
+
 4.5.0
 -----------------
 [Update] Made compatible for Moodle 4.5
-
 
 4.4.0
 -----------------
