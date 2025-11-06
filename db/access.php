@@ -25,15 +25,15 @@
  **/
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
+$capabilities = [
 
-    'report/offlinequizcron:view' => array(
+    'report/offlinequizcron:view' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
-            'manager' => CAP_ALLOW
-        ),
+        'archetypes' => [
+            'manager' => CAP_ALLOW,
+        ],
 
         'clonepermissionsfrom' => 'moodle/site:config',
-    )
-);
+    ],
+];

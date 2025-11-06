@@ -25,14 +25,14 @@
  *
  **/
 
-require(dirname(__FILE__).'/../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/report/offlinequizcron/locallib.php');
 
 // Get URL parameters.
 $jobid = optional_param('jobid', 0, PARAM_INT);
 
 // Print the header & check permissions.
-admin_externalpage_setup('reportofflinequizcron', '', null, '', array('pagelayout' => 'report'));
+admin_externalpage_setup('reportofflinequizcron', '', null, '', ['pagelayout' => 'report']);
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
 
 if ($jobid) {

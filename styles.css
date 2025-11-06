@@ -26,74 +26,73 @@
  **/
 
 #page-admin-report-offlinequizcron-index div.centerbox {
-	text-align: center;
+    text-align: center;
 }
 
 #page-admin-report-offlinequizcron-index div.commandsdiv {
-	 width: 100%;
-/*	 text-align: left; */
+    width: 100%;
 }
 
 #page-admin-report-offlinequizcron-index div#tablecontainer table {
-	 border: 1px solid #BBBBBB !important;
+    border: 1px solid #bbb;
 }
 
 #page-admin-report-offlinequizcron-index div#tablecontainer th {
-	 border: 1px solid #BBBBBB !important;
+    border: 1px solid #bbb;
 }
 
 #page-admin-report-offlinequizcron-index div#tablecontainer td {
-	 border-left: 1px solid #BBBBBB !important;
-	 border-right: 1px solid #BBBBBB !important;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
 }
 
 #page-admin-report-offlinequizcron-index form#reportform input[type="checkbox"] {
- 	margin-right: 3px;
- 	vertical-align: middle;	
+    margin-right: 3px;
+    vertical-align: middle;
 }
 
 #page-admin-report-offlinequizcron-index table#jobdetailstable {
-	 border: 1px solid #BBBBBB !important;
-	 width: 70%;
+    border: 1px solid #bbb;
+    width: 70%;
 }
 
 
 #page-admin-report-offlinequizcron-index div.filestable {
-	width: 90%;
+    width: 90%;
 }
 
 #page-admin-report-offlinequizcron-index div.controls {
-	text-align: center;
-	width: 80%;
+    text-align: center;
+    width: 80%;
 }
 
-#page-admin-report-offlinequizcron-index div.buttons { 
+#page-admin-report-offlinequizcron-index div.buttons {
     width: auto;
     display: inline-block;
 }
 
 
-#page-admin-report-offlinequizcron-index div.resubmitbutton { 
+#page-admin-report-offlinequizcron-index div.resubmitbutton {
     display: inline-block;
 }
 
-#page-admin-report-offlinequizcron-index div.deletebutton { 
+#page-admin-report-offlinequizcron-index div.deletebutton {
     display: inline-block;
 }
 
-#page-admin-report-offlinequizcron-index div.downloadbutton { 
+#page-admin-report-offlinequizcron-index div.downloadbutton {
     display: inline-block;
 }
 
-#page-admin-report-offlinequizcron-index .processqueue { 
+#page-admin-report-offlinequizcron-index .processqueue {
     font-weight: bold;
 }
 
-#page-admin-report-offlinequizcron-index .backtomainlink { 
+#page-admin-report-offlinequizcron-index .backtomainlink {
     font-weight: bold;
 }
 
 div.paging {
-	text-align: center;
+    text-align: center;
 }
 

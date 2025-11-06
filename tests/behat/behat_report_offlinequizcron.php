@@ -29,9 +29,6 @@
 require_once(__DIR__ . '/../../../../lib/behat/behat_base.php');
 require_once(__DIR__ . '/../../../../question/tests/behat/behat_question_base.php');
 
-use Behat\Behat\Context\Step\Given as Given,
-    Behat\Gherkin\Node\TableNode as TableNode,
-    Behat\Mink\Exception\ExpectationException as ExpectationException;
 
 /**
  * Steps definitions related to report_offlinequizcron.
@@ -40,6 +37,4 @@ use Behat\Behat\Context\Step\Given as Given,
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class behat_report_offlinequizcron extends behat_question_base {
-
-
 }

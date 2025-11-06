@@ -26,8 +26,10 @@
  **/
 
 defined('MOODLE_INTERNAL') || die;
-
-$ADMIN->add('reports', new admin_externalpage('reportofflinequizcron', get_string('pluginname', 'report_offlinequizcron'),
-        "$CFG->wwwroot/report/offlinequizcron/index.php", 'report/offlinequizcron:view'));
-
+$ADMIN->add('reports', new admin_externalpage(
+    'reportofflinequizcron1',
+    get_string('pluginname', 'report_offlinequizcron'),
+    "$CFG->wwwroot/report/offlinequizcron/index.php",
+    'report/offlinequizcron:view'
+));
 $settings = null;

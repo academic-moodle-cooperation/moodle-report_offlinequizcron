@@ -25,29 +25,35 @@
  *
  **/
 define('NO_OUTPUT_BUFFERING', true);
-require(dirname(__FILE__).'/../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->dirroot . '/report/offlinequizcron/locallib.php');
 require_once($CFG->dirroot . '/mod/offlinequiz/cron.php');
 
 // Print the header & check permissions.
-admin_externalpage_setup('reportofflinequizcron', '', null, '', array('pagelayout' => 'report'));
+admin_externalpage_setup('reportofflinequizcron', '', null, '', ['pagelayout' => 'report']);
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
 
 echo $OUTPUT->header();
 echo $OUTPUT->box_start('centerbox');
 echo $OUTPUT->heading(get_string('processingqueue', 'report_offlinequizcron'));
-echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php',
-        get_string('backtomainpage', 'report_offlinequizcron'),
-    null, array('class' => 'backtomainlink'));
+echo $OUTPUT->action_link(
+    $CFG->wwwroot . '/report/offlinequizcron/index.php',
+    get_string('backtomainpage', 'report_offlinequizcron'),
+    null,
+    ['class' => 'backtomainlink']
+);
 echo '<br/><br/>';
 
 offlinequiz_evaluation_cron(0, true);
 
 echo '<br/><br/>';
 
-echo $OUTPUT->action_link($CFG->wwwroot . '/report/offlinequizcron/index.php',
-        get_string('backtomainpage', 'report_offlinequizcron'),
-    null, array('class' => 'backtomainlink'));
+echo $OUTPUT->action_link(
+    $CFG->wwwroot . '/report/offlinequizcron/index.php',
+    get_string('backtomainpage', 'report_offlinequizcron'),
+    null,
+    ['class' => 'backtomainlink']
+);
 echo $OUTPUT->box_end();
 // Footer.
 echo $OUTPUT->footer();

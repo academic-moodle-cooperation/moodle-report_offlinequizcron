@@ -25,7 +25,7 @@
  *
  **/
 
-require(dirname(__FILE__).'/../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->libdir . '/filelib.php');
 
 $jobid = optional_param('jobid', 0, PARAM_INT);
@@ -44,8 +44,8 @@ if (!has_capability('moodle/site:config', context_system::instance())) {
     die;
 }
 
-if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))) {
-    $files = $DB->get_records('offlinequiz_queue_data', array('queueid' => $job->id));
+if ($jobid && $job = $DB->get_record('offlinequiz_queue', ['id' => $jobid])) {
+    $files = $DB->get_records('offlinequiz_queue_data', ['queueid' => $job->id]);
 
     $job->status = 'new';
     $job->timecreated = time();
@@ -58,9 +58,10 @@ if ($jobid && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))
         $file->error = null;
         $DB->update_record('offlinequiz_queue_data', $file);
     }
-    redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', array('pagesize' => $pagesize,
-                      'statusnew' => $statusnew,
-                      'statusprocessing' => $statusprocessing,
-                      'statusfinished' => $statusfinished)));
+    redirect(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/index.php', [
+        'pagesize' => $pagesize,
+        'statusnew' => $statusnew,
+        'statusprocessing' => $statusprocessing,
+        'statusfinished' => $statusfinished,
+    ]));
 }
-

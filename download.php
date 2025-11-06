@@ -25,7 +25,7 @@
  *
  **/
 
-require(dirname(__FILE__).'/../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 require_once($CFG->libdir . '/filelib.php');
 
 $fileid = optional_param('fileid', 0, PARAM_INT);
@@ -41,24 +41,24 @@ if (!has_capability('moodle/site:config', context_system::instance())) {
     die;
 }
 
-if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $fileid))) {
+if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', ['id' => $fileid])) {
     // Download for single image files.
     if (!file_exists($file->filename)) {
         send_file_not_found();
     } else {
         $pathparts = pathinfo($file->filename);
         $shortname = $pathparts['basename'];
-        send_file($file->filename, $shortname, 'default' , 0, false, true);
+        send_file($file->filename, $shortname, 'default', 0, false, true);
     }
-} else if ($jobid && $downloadall && $job = $DB->get_record('offlinequiz_queue', array('id' => $jobid))) {
+} else if ($jobid && $downloadall && $job = $DB->get_record('offlinequiz_queue', ['id' => $jobid])) {
     // Download all files of a job as a ZIP archive.
-    $files = $DB->get_records('offlinequiz_queue_data', array('queueid' => $job->id));
-    $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', array('id' => $job->id));
-    $offlinequiz = $DB->get_record('offlinequiz', array('id' => $offlinequizid));
-    $shortname = $DB->get_field('course', 'shortname', array('id' => $offlinequiz->course));
+    $files = $DB->get_records('offlinequiz_queue_data', ['queueid' => $job->id]);
+    $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', ['id' => $job->id]);
+    $offlinequiz = $DB->get_record('offlinequiz', ['id' => $offlinequizid]);
+    $shortname = $DB->get_field('course', 'shortname', ['id' => $offlinequiz->course]);
     $zipfilename = $shortname . '_' . $offlinequiz->name;
 
-    $filelist = array();
+    $filelist = [];
 
     foreach ($files as $file) {
         if (file_exists($file->filename)) {
@@ -76,7 +76,7 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
 } else {
     // Download selected files as a ZIP archive.
     $rawdata = (array) data_submitted();
-    $fileids = array();
+    $fileids = [];
 
     foreach ($rawdata as $key => $value) {
         if (preg_match('!^fileids([0-9]+)$!', $key)) {
@@ -87,19 +87,19 @@ if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', array('id' => $
     if (!empty($fileids)) {
         require_once($CFG->libdir . '/filestorage/zip_packer.php');
 
-        $filelist = array();
+        $filelist = [];
         foreach ($fileids as $fileid) {
-            $file = $DB->get_record('offlinequiz_queue_data', array('id' => $fileid));
+            $file = $DB->get_record('offlinequiz_queue_data', ['id' => $fileid]);
             if (file_exists($file->filename)) {
                 $pathparts = pathinfo($file->filename);
                 $filelist[$pathparts['basename']] = $file->filename;
             }
         }
 
-        $jobid = $DB->get_field('offlinequiz_queue_data', 'queueid', array('id' => $fileids[0]));
-        $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', array('id' => $jobid));
-        $offlinequiz = $DB->get_record('offlinequiz', array('id' => $offlinequizid));
-        $shortname = $DB->get_field('course', 'shortname', array('id' => $offlinequiz->course));
+        $jobid = $DB->get_field('offlinequiz_queue_data', 'queueid', ['id' => $fileids[0]]);
+        $offlinequizid = $DB->get_field('offlinequiz_queue', 'offlinequizid', ['id' => $jobid]);
+        $offlinequiz = $DB->get_record('offlinequiz', ['id' => $offlinequizid]);
+        $shortname = $DB->get_field('course', 'shortname', ['id' => $offlinequiz->course]);
         $zipfilename = $shortname . '_' . $offlinequiz->name;
 
         $zipper = new zip_packer();

@@ -37,7 +37,6 @@ require_once($CFG->libdir . '/tablelib.php');
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class job_files_table extends \flexible_table {
-
     /**
      * @var $reportscript
      */
@@ -75,10 +74,10 @@ class job_files_table extends \flexible_table {
     public function wrap_html_start() {
         echo '<br/><center>';
         echo '<div id="tablecontainer" class="filestable">';
-        echo ' <form id="filesform" method="post" action="'. $this->reportscript . '" >';
+        echo ' <form id="filesform" method="post" action="' . $this->reportscript . '" >';
 
         foreach ($this->params as $name => $value) {
-            echo '  <input type="hidden" name="' . $name .'" value="' . $value . '" />';
+            echo '  <input type="hidden" name="' . $name . '" value="' . $value . '" />';
         }
         echo '  <input type="hidden" name="sesskey" value="' . sesskey() . '" />';
     }
@@ -95,10 +94,10 @@ class job_files_table extends \flexible_table {
         echo '<div class="commandsdiv">';
         echo '<table id="commands" algin="left">';
         echo ' <tr><td>';
-        echo '  <a href="#" id="filesform-select">'. $strselectall . '</a> / ';
+        echo '  <a href="#" id="filesform-select">' . $strselectall . '</a> / ';
         echo '  <a href="#" id="filesform-deselect">' . $strselectnone . '</a> ';
         echo '  &nbsp;&nbsp;';
-        echo '  <input type="submit" class="btn btn-secondary" value="'.
+        echo '  <input type="submit" class="btn btn-secondary" value="' .
             get_string('downloadselected', 'report_offlinequizcron') . '"/>';
         echo '  </td></tr></table>';
         echo ' </form>';
