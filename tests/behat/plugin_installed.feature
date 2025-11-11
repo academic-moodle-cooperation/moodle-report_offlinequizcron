@@ -8,5 +8,5 @@ Feature: Within a moodle instance, an administrator should be able to have an ov
 
   Login as an admin, add a new offline quiz to a course and there some multiple choice questions. Then create the forms as PDF for the offline quiz.
     Given I log in as "admin"
-    And I navigate to "Reports > Offlinequiz Cronjob Admin" in site administration
+    When I navigate to "Reports > Offlinequiz Cronjob Admin" in site administration
     Then I should see "List of offline quiz evaluation jobs"
