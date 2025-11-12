@@ -37,8 +37,7 @@ require_login();
 if (!has_capability('moodle/site:config', context_system::instance())) {
     // The requested section could depend on a different capability
     // but most likely the user has inadequate capabilities.
-    print_error('accessdenied', 'admin');
-    die;
+    throw new moodle_exception('accessdenied', 'admin');
 }
 
 if ($fileid && $file = $DB->get_record('offlinequiz_queue_data', ['id' => $fileid])) {
