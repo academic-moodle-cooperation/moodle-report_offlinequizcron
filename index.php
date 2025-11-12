@@ -34,12 +34,7 @@ $jobid = optional_param('jobid', 0, PARAM_INT);
 // Print the header & check permissions.
 admin_externalpage_setup('reportofflinequizcron', '', null, '', ['pagelayout' => 'report']);
 $PAGE->requires->css(new moodle_url($CFG->wwwroot . '/report/offlinequizcron/styles.css'));
-
-if ($jobid) {
-    report_offlinequizcron_display_job_details($jobid);
-} else {
-    report_offlinequizcron_display_job_list();
-}
+report_offlinequizcron_display_job_list();
 
 // Footer.
 echo $OUTPUT->footer();
