@@ -179,7 +179,11 @@ function report_offlinequizcron_display_job_list() {
         $offlinequizurl = new moodle_url($CFG->wwwroot . '/mod/offlinequiz/view.php', ['q' => $job->oqid]);
         $courseurl = new moodle_url($CFG->wwwroot . '/course/view.php', ['id' => $job->cid]);
         $userurl = new moodle_url($CFG->wwwroot . '/user/profile.php', ['id' => $job->uid]);
-        $joburl = new moodle_url('/mod/offlinequiz/report.php', ['q' => $job->oqid, 'mode' => 'correct'], 'offlinequiz-queue-' . $job->jobid);
+        $joburl = new moodle_url(
+            '/mod/offlinequiz/report.php',
+            ['q' => $job->oqid, 'mode' => 'correct'],
+            'offlinequiz-queue-' . $job->jobid
+        );
         $table->add_data(
             [
                 get_string('status' . $job->status, 'report_offlinequizcron'),
