@@ -46,6 +46,6 @@ $string['status'] = 'Status';
 $string['statusfinished'] = 'Finished';
 $string['statusnew'] = 'New';
 $string['statusprocessing'] = 'Processing';
-$string['timecreated'] = 'Created At';
+$string['timecreated'] = 'Created on';
 $string['timefinish'] = 'Evaluation End';
 $string['timestart'] = 'Evaluation Start';

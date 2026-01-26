@@ -121,7 +121,7 @@ function report_offlinequizcron_display_job_list() {
                    u.alternatename, u.middlename, u.firstnamephonetic, u.lastnamephonetic,
                    (SELECT count(*)
                      FROM {offlinequiz_queue_data} oqd
-                     WHERE oqd.queueid = oqq.id) as files,
+                     WHERE oqd.queueid = oqq.id) as pageamount,
                    oqq.id as jobid
               FROM {offlinequiz_queue} oqq
               JOIN {offlinequiz} oq on oqq.offlinequizid = oq.id
@@ -193,7 +193,7 @@ function report_offlinequizcron_display_job_list() {
                 $job->jobtimecreated > 0 ? userdate($job->jobtimecreated, $strtimeformat) : '',
                 $job->jobtimestart > 0 ? userdate($job->jobtimestart, $strtimeformat) : '',
                 $job->jobtimefinish > 0 ? userdate($job->jobtimefinish, $strtimeformat) : '',
-                html_writer::link($joburl, $job->files),
+                html_writer::link($joburl, $job->pageamount),
             ]
         );
     }
