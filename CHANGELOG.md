@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+5.1.0
+-----------------
+[Update] Made compatible for Moodle 5.1
+[Feature] Klicking on the link now opens the file overview directly in offlinequiz
+[Feature] Added a new column for the amount of pages in a file
 
 5.0.0
 -----------------
