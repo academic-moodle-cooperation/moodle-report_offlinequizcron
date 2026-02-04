@@ -34,4 +34,4 @@ $plugin->release   = "v5.1.0";
 $plugin->requires  = 2025100600;
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->component = 'report_offlinequizcron';
-$plugin->dependencies = ['mod_offlinequiz' => 2025080400];
+$plugin->dependencies = ['mod_offlinequiz' => 2026012900];
