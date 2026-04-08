@@ -1,5 +1,10 @@
 CHANGELOG
 =========
+5.2.0
+-----------------
+[Update] Made compatible for Moodle 5.2
+
+
 5.1.0
 -----------------
 [Update] Made compatible for Moodle 5.1
